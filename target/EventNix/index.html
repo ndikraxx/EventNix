@@ -1,0 +1,93 @@
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>EventName</title>
+<!-- Bootstrap -->
+
+<link href="css/datetimepicker.min.css" rel="stylesheet">
+<link href="css/min.css" rel="stylesheet">
+<link href="css/theme.min.css" rel="stylesheet">
+
+
+<link type="text/css" href="css/custom.css" />
+<style>
+.center-block {
+	width: 450px;
+	float: 20px;
+	padding: 20px;
+}
+
+.box-shadow {
+	box-shadow: 3px 3px 5px 6px #ccc;
+	border-radius: 15px;
+}
+</style>
+</head>
+
+<body>
+	<!--navbar-->
+	<nav class="navbar navbar-inverse navbar-fixed-top" id="my-navbar">
+		<div class="container">
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle" data-toggle="collapse"
+					data-target="#main_menu">
+					<span class="icon-bar"></span> <span class="icon-bar"></span> <span
+						class="icon-bar"></span>
+				</button>
+				<a href="template.php" class="navbar-brand">EventNix</a>
+			</div>
+			<!--End NavBar-Header-->
+			<div class="collapse navbar-collapse" id="main_menu">
+				<ul class="nav navbar-nav">
+			</div>
+			<!--End collapse-->
+		</div>
+		<!--End Container-->
+	</nav>
+	<!--End NavBar-->
+
+	<br>
+	<br>
+	<hr>
+	<!---Login form-->
+
+	<div class="container text-center" id="content-login" >
+		<div class="center-block box-shadow">
+			<h2>Log in</h2>
+			<a href="signup.php">Don't have an account? Sign up!</a> </br> <br>
+			<form role="form" enctype="multipart/form-data" method="post">
+				<div class="form-group">
+					<input type="text" class="form-control" id="phone_number" name="pnumber" placeholder="Phone Number"> <br>
+					 <input type="password" class="form-control" id="password" name="password" placeholder="Password">
+
+				</div>
+				<br>
+
+
+				<button type="submit" class="btn btn-lg btn-info" name="login">Login</button>
+
+			</form>
+		</div>
+	</div>
+
+<div>
+	<footer>
+			<nav class="navbar navbar-inverse navbar-fixed-bottom" role="navigation" >
+			  <div class="container text-center">
+				<div class="footer-content">
+				  Already registered? <a href="index.html" class="btn btn-primary"> Sign In </a>
+				</div>
+			  </div><!-- /.container-fluid -->
+			</nav>
+		</footer>
+</div>
+		
+	<!--End of Footer Section-->
+	<!-- jQuery -->
+	<script src="js/jquery-2.1.4.js"></script>
+	<!--bootstrap minified javascript-->
+	<script src="js/bootstrap.min.js"></script>
+
+</body>
+</html>
