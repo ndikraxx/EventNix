@@ -1,93 +1,100 @@
-<html xmlns="http://www.w3.org/1999/xhtml">
+<!DOCTYPE html>
+<html lang="en">
+  
 <head>
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>EventNix</title>
 
-<title>EventName</title>
-<!-- Bootstrap -->
+    <!-- Bootstrap -->
+	<script src="js/pace.js"></script>
+    <link href="css/bootstrap.css" rel="stylesheet">
+    <link href="css/theme.css" rel="stylesheet">
+    <link href="css/font-awesome.css" rel="stylesheet">
+    <link href="css/animate.css" rel="stylesheet">
 
-<link href="css/datetimepicker.min.css" rel="stylesheet">
-<link href="css/min.css" rel="stylesheet">
-<link href="css/theme.min.css" rel="stylesheet">
-
-
-<link type="text/css" href="css/custom.css" />
-<style>
-.center-block {
-	width: 450px;
-	float: 20px;
-	padding: 20px;
-}
-
-.box-shadow {
-	box-shadow: 3px 3px 5px 6px #ccc;
-	border-radius: 15px;
-}
-</style>
-</head>
-
-<body>
-	<!--navbar-->
-	<nav class="navbar navbar-inverse navbar-fixed-top" id="my-navbar">
-		<div class="container">
-			<div class="navbar-header">
-				<button type="button" class="navbar-toggle" data-toggle="collapse"
-					data-target="#main_menu">
-					<span class="icon-bar"></span> <span class="icon-bar"></span> <span
-						class="icon-bar"></span>
-				</button>
-				<a href="template.php" class="navbar-brand">EventNix</a>
-			</div>
-			<!--End NavBar-Header-->
-			<div class="collapse navbar-collapse" id="main_menu">
-				<ul class="nav navbar-nav">
-			</div>
-			<!--End collapse-->
-		</div>
-		<!--End Container-->
-	</nav>
-	<!--End NavBar-->
-
-	<br>
-	<br>
-	<hr>
-	<!---Login form-->
-
-	<div class="container text-center" id="content-login" >
-		<div class="center-block box-shadow">
-			<h2>Log in</h2>
-			<a href="signup.php">Don't have an account? Sign up!</a> </br> <br>
-			<form role="form" enctype="multipart/form-data" method="post">
-				<div class="form-group">
-					<input type="text" class="form-control" id="phone_number" name="pnumber" placeholder="Phone Number"> <br>
-					 <input type="password" class="form-control" id="password" name="password" placeholder="Password">
-
+  </head>
+  <body>
+	<div class="container" id="container" style="display:none;">
+		<header>
+			<!-- Main comapny header -->
+			<nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+			  <div class="container">
+				<div class="navbar-header">
+				  <a class="navbar-brand top-navbar-brand" href="#"><img src="images/alpha-logo.png"/> EventNix</a>
 				</div>
-				<br>
-
-
-				<button type="submit" class="btn btn-lg btn-info" name="login">Login</button>
-
-			</form>
-		</div>
-	</div>
-
-<div>
-	<footer>
-			<nav class="navbar navbar-inverse navbar-fixed-bottom" role="navigation" >
+			  </div>
+			</nav>
+		</header>
+		<section id="form" class="animated fadeInDown">
+			<div class="container">    
+				<div id="loginbox" class="mainbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">                    
+					<div class="panel white-alpha-90" >
+						<div class="panel-heading">
+							<div class="panel-title text-center"><h2>Sign In to <span class="text-primary">EventNix</span></h2></div>
+						</div>  
+						<div id='login'></div>   
+							<div class="panel-body" >
+							<div style="display:none" id="login-alert" class="alert alert-danger col-sm-12"></div>
+								<div id="login-form">
+								<!-- <form id="loginform" class="form-horizontal" role="form">
+								<div class="input-group">
+									<span class="input-group-addon"><i class="fa fa-user"></i></span>
+									<input id="login-username" type="text" class="form-control" name="username" value="" placeholder="username or email">                                        
+								</div>
+								<div class="input-group">
+									<span class="input-group-addon"><i class="fa fa-lock"></i></span>
+									<input id="login-password" type="password" class="form-control" name="password" placeholder="password">
+								</div>
+								<div class="input-group col-xs-12 text-center login-action">
+								  <div class="checkbox">
+									<label>
+									  <input id="login-remember" type="checkbox" name="remember" value="1" style="margin-top: 10px;"> Remember me &nbsp;
+									  <span id="btn-login"><a href="#" class="btn btn-success">Login  </a></span>
+									</label>
+								  </div>
+								</div>
+								<div style="margin-top:10px" class="form-group">
+									<div class="col-sm-12 controls">
+									  
+									</div>
+								</div>
+							</form>      -->
+							</div>
+						</div>                 
+					</div>  
+				</div>
+			</div>
+		</section>
+		<footer>
+			<nav class="navbar navbar-default navbar-fixed-bottom" role="navigation">
 			  <div class="container text-center">
 				<div class="footer-content">
-				  Already registered? <a href="index.html" class="btn btn-primary"> Sign In </a>
+				  Haven't registered yet? <a href="register.html" class="btn btn-primary"> Register Here </a>
 				</div>
 			  </div><!-- /.container-fluid -->
 			</nav>
 		</footer>
-</div>
-		
-	<!--End of Footer Section-->
-	<!-- jQuery -->
-	<script src="js/jquery-2.1.4.js"></script>
-	<!--bootstrap minified javascript-->
-	<script src="js/bootstrap.min.js"></script>
+	</div>
+<script src="js/EventNix/base.app.js"></script>
+<script src="js/EventNix/login.js"></script>
 
-</body>
+
+	<script src="js/jquery.min.js"></script>
+	<script src="js/bootstrap.min.js"></script>
+	<script src="js/jquery.backstretch.min.js"></script>
+
+	<script>
+		Pace.on('hide', function(){
+		  $("#container").fadeIn('1000');
+		  $.backstretch([
+				"images/taxi-2.jpg"
+			], {duration: 5000, fade: 1000});
+		});
+		
+	</script>
+	
+  </body>
+
 </html>
