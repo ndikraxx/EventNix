@@ -1,5 +1,8 @@
 package eventnix.person.dao;
 
-public class PersonDao implements PersonDaoI {
+import eventnix.generic.dao.GenericDao;
+import eventnix.person.model.Person;
+
+public class PersonDao extends GenericDao<Person, Long> implements PersonDaoI {
 
 }
