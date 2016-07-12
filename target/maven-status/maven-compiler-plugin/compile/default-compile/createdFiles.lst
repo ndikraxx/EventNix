@@ -1,0 +1,10 @@
+eventnix/generic/dao/GenericDao.class
+eventnix/person/bean/PersonBean.class
+eventnix/person/bean/PersonBeanI.class
+eventnix/person/action/LoginA.class
+eventnix/common/model/Address.class
+eventnix/common/model/Login.class
+eventnix/generic/dao/GenericDaoI.class
+eventnix/person/dao/PersonDaoI.class
+eventnix/person/model/Person.class
+eventnix/person/dao/PersonDao.class

@@ -14,23 +14,45 @@ import eventnix.person.model.Person;
 @Stateless
 @TransactionManagement(TransactionManagementType.CONTAINER)
 public class PersonBean implements PersonBeanI{
-	@Inject
-	PersonDaoI personDao;
-	
 	@PersistenceContext
-	EntityManager em;
+	private EntityManager em;
+	
+	@Inject
+	private PersonDaoI personDao;
 	
 	@PostConstruct
 	public void init(){
 		personDao.setEm(em);
 	}
 
-	public Person save(Person person) {
+	public void save(Person person) {
+		personDao.save(person);
 		
-		return personDao.save(person);
 	}
 
-	
-	
+	public boolean loginStatus(String username, String password) {
+		
+		if(personDao.login(username, password) == true)
+			return true;
+		else 
+			return false;
+	}
 
+	public String userType(String username, String password) {
+		return personDao.userType(username, password);
+	}
+
+	public String lastName(String username, String password) {
+		
+		return personDao.userDetails(username, password);
+	}
+
+/*	public String userType(String username, String password){
+		if(personDao.login(username, password)== true){
+		 return personDao.userType(username, password);	
+	}
+		return null;
+}*/
+	
+	
 }

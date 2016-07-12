@@ -20,9 +20,18 @@ var register = App.extend(App.Cmp, {
 		form: 'input'
 	},{
 		id: 'phonenumber', 
-		name: 'phonename',
+		name: 'phone',
 		type: 'text',
 		placeholder: 'Enter your phone number',
+		span: 'fa fa-phone',
+		required: 'required',
+		form: 'input'
+	},
+	{
+		id: 'identification', 
+		name: 'id',
+		type: 'text',
+		placeholder: 'Enter your id or passport number',
 		span: 'fa fa-phone',
 		required: 'required',
 		form: 'input'

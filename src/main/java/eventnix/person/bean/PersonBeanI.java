@@ -2,7 +2,13 @@ package eventnix.person.bean;
 
 import eventnix.person.model.Person;
 
-public interface PersonBeanI {
+public interface PersonBeanI{
+	
+	void save(Person person);
+	
+	boolean loginStatus (String username, String password);
 
-	public Person save (Person person);
+	String userType(String username, String password);
+	
+	String lastName(String username, String password);
 }

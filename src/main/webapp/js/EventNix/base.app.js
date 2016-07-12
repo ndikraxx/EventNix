@@ -22,6 +22,9 @@ App.Cmp = {
 			var me = this;
 			me.getEl(me.responseTarget).innerHTML = resp;
 		},
+		redirect: function(url){
+			window.location = url;
+		},
 		ajaxRequest : function() {
 			var me = this;
 			var xhr = new XMLHttpRequest();
@@ -45,7 +48,8 @@ App.Cmp = {
 		model : [],
 		form : function() {
 			var context = this;
-			var form = '<form id="loginform" class="form-horizontal" role="form">';
+			
+			var form = ' <form id="loginform" class="form-horizontal" >';
 			context.model.forEach(function(el){
 				
 				form+= '<div class="input-group">'
@@ -97,12 +101,12 @@ App.Cmp = {
 				requestParams : formValues,
 				responseTarget : context.responseTarget,
 				updateTarget : function(resp) {
-				
+					context.redirect(resp);
 				}
 			});
 			
 			
 		}
 		
-		
+
 }
