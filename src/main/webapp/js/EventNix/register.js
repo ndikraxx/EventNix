@@ -57,8 +57,8 @@ var register = App.extend(App.Cmp, {
 		type: 'select',
 		span: 'fa fa-user',
 		options: [
-		          {label: 'Event-Attender', value: 'Event-Attender'},
-		          {label: 'Event-Marketer', value: 'Event-Marketer'}
+		          {label: 'Attender', value: 'Attender'},
+		          {label: 'Organizer', value: 'Organizer'}
 		          ]
 	},{
 		id: 'password', 

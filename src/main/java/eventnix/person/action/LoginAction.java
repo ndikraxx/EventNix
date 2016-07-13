@@ -13,6 +13,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import eventnix.person.bean.PersonBeanI;
 import eventnix.person.model.Person;
@@ -31,46 +32,80 @@ public class LoginAction extends HttpServlet {
 	public void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		String username = request.getParameter("username");
+		
 		String password = request.getParameter("password");
+		
 		String hashedPass = "";
+		
 		try {
+			
 			hashedPass = hashPassword(password);
+			
 		} catch (NoSuchAlgorithmException e1) {
 
 			e1.printStackTrace();
 		}
 
 		PrintWriter out = response.getWriter();
-
+		
 		boolean login = personBean.loginStatus(username, hashedPass);
-		System.out.println("login status is " + login);
-		try {
-			if (login == true) {
-				System.out.println(personBean.userType(username, hashedPass));
-				System.out.println(personBean.lastName(username, hashedPass));
-				out.println("index.jsp");
+		
+		
 
-			} else if (login == false) {
+		try{
+			if (login == true) {
+				String uType = personBean.userType(username, hashedPass).toString();
 				
+				String lastName = personBean.lastName(username, hashedPass).toString();
+				
+				HttpSession session = request.getSession();
+				
+				session.setAttribute("sessionLname", lastName);
+				
+				if("Attender".equals(uType)){
+					
+					out.println("index.jsp");
+					
+				}
+				else if ("Organizer".equals(uType)){
+					
+					out.println("organizer.jsp");
+					
+				}
+				else if ("Admin".equals(uType)){
+					
+					out.println("admin.jsp");
+					
+				}	
+			}
+		
+			else if (login == false) {
+
 				out.println("login.jsp");
 			}
 		}
-
-		catch (Exception e) {
-
+		catch (Exception e){
+			
 		}
-
 	}
 
 	public static String hashPassword(String password)
 			throws NoSuchAlgorithmException {
+		
 		MessageDigest md = MessageDigest.getInstance("MD5");
+		
 		md.update(password.getBytes());
+		
 		byte[] b = md.digest();
+		
 		StringBuffer sb = new StringBuffer();
+		
 		for (byte b1 : b) {
+			
 			sb.append(Integer.toHexString(b1 & 0xff).toString());
+			
 		}
+		
 		return sb.toString();
 
 	}

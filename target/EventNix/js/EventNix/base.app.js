@@ -103,9 +103,7 @@ App.Cmp = {
 				updateTarget : function(resp) {
 					context.redirect(resp);
 				}
-			});
-			
-			
+			});	
 		}
 		
 
