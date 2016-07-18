@@ -10,7 +10,7 @@ import javax.persistence.Id;
 public class Event {
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
-	private Long id;
+	private int id;
 	
 	@Column
 	private String name;
@@ -49,11 +49,11 @@ public class Event {
 		this.status = status;
 	}
 
-	public Long getId() {
+	public int getId() {
 		return id;
 	}
 
-	public void setId(Long id) {
+	public void setId(int id) {
 		this.id = id;
 	}
 	
@@ -101,6 +101,7 @@ public class Event {
 	public String getEvent(){
 		StringBuilder builder = new StringBuilder();
 		builder.append("{").
+			append("\"id\": \"").append(getId()).append("\" , ").
 			append("\"name\": \"").append(getName()).append("\" , ").
 			append("\"venue\": \"").append(getVenue()).append("\" , ").
 			append("\"price\": \"").append(getPrice()).append("\" , ").

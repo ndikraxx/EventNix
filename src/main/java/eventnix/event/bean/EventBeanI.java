@@ -9,5 +9,9 @@ public interface EventBeanI {
 	 void save(Event event);
 	 
 	 String listInJson();
+	 
+	 void approve (int id);
+
+	void disapprove(int id);
 
 }

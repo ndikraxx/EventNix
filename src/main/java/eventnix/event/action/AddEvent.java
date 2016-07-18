@@ -14,7 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 import eventnix.event.bean.EventBeanI;
 import eventnix.event.model.Event;
 
-@WebServlet("/addEvent")
+@WebServlet("/addEvent/*")
 public class AddEvent extends HttpServlet {
 	
 	@EJB
@@ -24,6 +24,18 @@ public class AddEvent extends HttpServlet {
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException, IOException {
 		this.list(resp);
+		String [] pathCmp = req.getRequestURI().split("/");
+		String path = pathCmp[pathCmp.length-1];
+		
+		if(path.equalsIgnoreCase("approve")){
+			int id = Integer.parseInt(req.getParameter("id"));
+			eventBean.approve(id);
+			
+		}
+		else if (path.equalsIgnoreCase("disapprove")){
+			int id = Integer.parseInt(req.getParameter("id"));
+			eventBean.disapprove(id);
+		}
 	}
 
 	@Override
@@ -46,4 +58,10 @@ public class AddEvent extends HttpServlet {
         out.println(eventBean.listInJson());
 	
 			}
+	
+	public void action(HttpServletResponse resp, HttpServletRequest req)
+			throws ServletException, IOException {
+		
+		
+	}
 }

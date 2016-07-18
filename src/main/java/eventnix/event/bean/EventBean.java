@@ -55,7 +55,15 @@ public class EventBean implements EventBeanI{
 		return sb.toString();
 		
 	}
-	
+
+	public void approve(int id) {
+		eventDao.approve(id);
+		
+	}
+
+	public void disapprove (int id){
+		eventDao.disapprove(id);
+	}
 	
 
 }

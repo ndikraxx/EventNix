@@ -6,7 +6,6 @@ App.extend = function (prototype, literal){
 		newLiteral[k] = literal[k];
 	})
 	return newLiteral;
-	
 }
 
 App.Cmp = {
@@ -127,6 +126,34 @@ App.Cmp = {
 				}
 			});	
 		},
+		
+		approve: function (id){
+			var context = this;
+			
+			context.ajaxRequest.call({
+				httpMethod: context.httpMethod,
+				httpUrl: context.httpUrl+ '/approve?id='+id,
+				responseTarget: context.responseTarget,
+				updateTarget: function (resp){
+					
+				}
+			});
+		},
+		
+		disapprove: function (id){
+			var context = this;
+			
+			context.ajaxRequest.call({
+				httpMethod: context.httpMethod,
+				httpUrl: context.httpUrl+ '/disapprove?id='+id,
+				responseTarget: context.responseTarget,
+				updateTarget: function (resp){
+					
+				}
+			});
+		},
+		
+		
 		listView : function() {
 			var me = this;
 
@@ -146,19 +173,65 @@ App.Cmp = {
 				table+="<th></th></tr>";
 					var jsonRecords = JSON.parse(resp);
 					jsonRecords.forEach(function(el) {
+						var approve = "approve-"+el.id; 
+						var disapprove ="disapprove-"+el.id;
+						var del ="del-" + el.id;
+						var edit="edit-" + el.id;
 						table+='<tr>';
 						me.model.forEach(function (model){
 							table += '<td>'  +el[model.name] + '</td>'
 							
 								
 						});
-						table += '<td><a class = "btn btn-primary">'+me.button1+'</a></td>';
-						table += '<td><a class = "btn btn-danger">'+me.button2+' </a></td>';
+						if (me.modelId == "eventaction"){
+						table += "<td><a class = \"btn btn-primary\" id=\""+approve+"\">Approve</a></td>";
+						table += "<td> <a class=\"btn btn-danger\"  id=\""	+ disapprove + "\">Disapprove</a></td>";
 						table += '</tr>';
+						}
+						else if (me.modelId == "eventform"){
+							table += "<td> <a class=\"btn btn-primary\"  id=\""	+ edit + "\">Edit</a></td>";;
+							table += "<td> <a class=\"btn btn-danger\"  id=\""	+ del + "\">Delete</a></td>";
+							table += '</tr>';
+						}
+						
+				
 				});
 					table+="<table>";
-					
+				
 					me.getEl(me.responseTarget).innerHTML = table;
+					
+					if (me.getEl(me.responseTarget).innerHTML = table) {
+						
+						jsonRecords.forEach(function(el) {
+		
+							var approve = "approve-"+el.id; 
+							var disapprove ="disapprove-"+el.id;
+							var del ="del-" + el.id;
+							var edit="edit-" + el.id;
+							
+							 if (me.modelId == "eventform"){
+							me.getEl(del).addEventListener('click', function() {
+								console.log(el.id + "<br>")
+							});
+							
+							me.getEl(edit).addEventListener('click', function() {
+								console.log(el.id + "<br>")
+							});
+							 }
+							 
+							 else if (me.modelId == "eventaction"){
+								 
+							me.getEl(approve).addEventListener('click', function() {
+								me.approve(el.id);
+							});
+							
+							me.getEl(disapprove).addEventListener('click', function() {
+								me.disapprove(el.id);
+							});
+							
+						}
+						});
+				}
 				}
 			});
 		},

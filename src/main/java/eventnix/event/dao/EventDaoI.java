@@ -8,6 +8,8 @@ import eventnix.generic.dao.GenericDaoI;
 
 public interface EventDaoI extends GenericDaoI<Event, Long> {
 
+	void approve(int id);
 
+	void disapprove(int id);
 	
 }
