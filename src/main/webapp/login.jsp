@@ -35,9 +35,9 @@
 							<div class="panel-title text-center"><h2>Sign In to <span class="text-primary">EventNix</span></h2></div>
 						</div>  
 						<div id='login'></div>   
-							<div class="panel-body" >
+							 <div class="panel-body" >
 							<div style="display:none" id="login-alert" class="alert alert-danger col-sm-12"></div>
-							<div id="login-form">
+							<div id="login-form"> 
 							<!--	 <form id="loginform" class="form-horizontal" action="${pageContext.request.contextPath}/login" role="form">
 						  <div class="input-group">
 									<span class="input-group-addon"><i class="fa fa-user"></i></span>

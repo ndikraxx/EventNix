@@ -16,9 +16,7 @@
     <link rel="stylesheet" type="text/css" href="plugins/owl.carousel/owl-carousel/owl.carousel.css">
     <link rel="stylesheet" type="text/css" href="plugins/owl.carousel/owl-carousel/owl.theme.css">
     <link rel="stylesheet" type="text/css" href="plugins/owl.carousel/owl-carousel/owl.transitions.css">
-    	<link href="css/bootstrap-datepicker3.min.css" rel="stylesheet">
-		
-		<link href="css/style.css" rel="stylesheet">
+   
 </head>
 <body class="cl-default fixed">
 
@@ -64,7 +62,7 @@
                 <!-- sidebar menu: : style can be found in sidebar.less -->
                 <ul class="sidebar-menu">
                     <li class="active">
-                        <a href="index.html">
+                        <a href="organizer.jsp">
                             <i class="fa fa-dashboard"></i> <span>Dashboard</span>
                         </a>
                     </li>
@@ -75,21 +73,16 @@
                             <i class="fa fa-angle-left pull-right"></i>
                         </a>
                         <ul class="treeview-menu">
-								<li><a href="#" onclick=""><i class="fa fa-circle-o"></i>Create a new Event<!--Todo List--></a></li>
-                            <li><a href="#" onclick =""><i class="fa fa-circle-o"></i> View Posted Event Details <!-- Draggable Portlet--></a></li>
+								<li><a  onclick="showeventform()"><i class="fa fa-circle-o"></i>Create a new Event<!--Todo List--></a></li>
+                            <li><a href="#" onclick ="eventform.show()"><i class="fa fa-circle-o"></i> View Posted Event Details <!-- Draggable Portlet--></a></li>
                            </ul>
                     </li>
                     <li class="treeview">
-                        <a href="#">
+                        <a onclick ="">
                             <i class="fa fa-users"></i>
-                            <span>Users <!--Charts--></span>
-                            <i class="fa fa-angle-left pull-right"></i>
+                            <span>List of Event Attenders <!--Charts--></span>
+
                         </a>
-                        <ul class="treeview-menu">
-                            <li><a href="morris.html"><i class="fa fa-circle-o"></i> Event Marketers <!--Morris--></a></li>
-                            <li><a href="xchart.html"><i class="fa fa-circle-o"></i> Event Organizers <!--XChart--></a></li>
-                            <li><a href="xchart.html"><i class="fa fa-circle-o"></i> List of Event Attenders <!--XChart--></a></li>
-                        </ul>
                     </li>
                     <li class="treeview">
                         <a href="#">
@@ -150,6 +143,8 @@
 
 	<!-- start:javascript for all pages -->
 		<!-- start:jquery -->
+		<script src="js/EventNix/base.app.js"></script>
+		<script src="js/EventNix/eventform.js"></script>
 		<script src="js/jquery-1.11.1.min.js"></script>
 		<!-- start:bootstrap -->
 		<script src="js/bootstrap.min.js"></script>
