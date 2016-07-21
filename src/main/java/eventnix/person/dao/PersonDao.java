@@ -10,9 +10,9 @@ import eventnix.generic.dao.GenericDao;
 import eventnix.person.model.Person;
 
 public class PersonDao extends GenericDao<Person, Long> implements PersonDaoI {
-	public boolean login(String username, String password) {
-		String sql = "from Person p where p.login.username=:username and p.login.password=:password";
-		Query query = em.createQuery(sql).setParameter("username", username)
+	public boolean login(String phone, String password) {
+		String sql = "from Person p where p.phoneNumber=:phoneNumber and p.password=:password";
+		Query query = em.createQuery(sql).setParameter("phoneNumber", phone)
 				.setParameter("password", password);
 		Person person = new Person ();
 		List <Person> list = query.getResultList();
@@ -25,10 +25,10 @@ public class PersonDao extends GenericDao<Person, Long> implements PersonDaoI {
 		 }
 	}
 
-	public String userDetails(String username, String password) {
+	public String userDetails(String phone, String password) {
 		String lastname = "";
-		String sql = "from Person p where p.login.username=:username and p.login.password=:password";
-		Query query = em.createQuery(sql).setParameter("username", username)
+		String sql = "from Person p where p.phoneNumber=:phoneNumber and p.password=:password";
+		Query query = em.createQuery(sql).setParameter("phoneNumber", phone)
 				.setParameter("password", password);
 		List <Person> list = query.getResultList();
 		 if (list.isEmpty()){
@@ -43,10 +43,10 @@ public class PersonDao extends GenericDao<Person, Long> implements PersonDaoI {
 	
 	}
 
-	public String userType(String username, String password) {
+	public String userType(String phone, String password) {
 		String usertype = "";
-		String sql = "from Person p where p.login.username=:username and p.login.password=:password";
-		Query query = em.createQuery(sql).setParameter("username", username)
+		String sql = "from Person p where p.phoneNumber=:phoneNumber and p.password=:password";
+		Query query = em.createQuery(sql).setParameter("phoneNumber", phone)
 				.setParameter("password", password);
 		List <Person> list = query.getResultList();
 		 if (list.isEmpty()){
@@ -54,10 +54,27 @@ public class PersonDao extends GenericDao<Person, Long> implements PersonDaoI {
 		 }
 		 else{
 			 for (Person p : list){
-				usertype = p.getLogin().getUserType().toString();
+				usertype = p.getUserType().toString();
 			 }
 		 }
 		 return usertype;
+	}
+	
+	public String userId(String phone, String password) {
+		String userId = "";
+		String sql = "from Person p where p.phoneNumber=:phoneNumber and p.password=:password";
+		Query query = em.createQuery(sql).setParameter("phoneNumber", phone)
+				.setParameter("password", password);
+		List <Person> list = query.getResultList();
+		 if (list.isEmpty()){
+			 return null;
+		 }
+		 else{
+			 for (Person p : list){
+				 userId = p.getId().toString();
+			 }
+		 }
+		 return userId;
 	}
 	
 	

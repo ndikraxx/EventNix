@@ -24,6 +24,8 @@ public class AddEvent extends HttpServlet {
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException, IOException {
 		this.list(resp);
+		
+		
 		String [] pathCmp = req.getRequestURI().split("/");
 		String path = pathCmp[pathCmp.length-1];
 		
@@ -36,6 +38,9 @@ public class AddEvent extends HttpServlet {
 			int id = Integer.parseInt(req.getParameter("id"));
 			eventBean.disapprove(id);
 		}
+		
+		
+		
 	}
 
 	@Override

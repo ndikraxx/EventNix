@@ -1,0 +1,13 @@
+.box-shadow{
+box-shadow: 1px 1px 1px 1px #ccc;
+border-radius: 15px;
+margin-top: 20px;
+margin-right: 120px;
+margin-left: 200px;
+}
+
+.thumbnail slider{
+  width:1165px;   
+    height:470px;
+}
+

@@ -32,7 +32,7 @@ var register = App.extend(App.Cmp, {
 		name: 'id',
 		type: 'text',
 		placeholder: 'Enter your id or passport number',
-		span: 'fa fa-phone',
+		span: 'fa fa-user',
 		required: 'required',
 		form: 'input'
 	},{
@@ -41,14 +41,6 @@ var register = App.extend(App.Cmp, {
 		type: 'email',
 		placeholder: 'Enter your email',
 		span: 'fa fa-envelope',
-		required: 'required',
-		form: 'input'
-	},{
-		id: 'username', 
-		name: 'username',
-		type: 'text',
-		placeholder: 'Enter your username',
-		span: 'fa fa-user',
 		required: 'required',
 		form: 'input'
 	},{

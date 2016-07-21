@@ -12,4 +12,7 @@ public interface EventDaoI extends GenericDaoI<Event, Long> {
 
 	void disapprove(int id);
 	
+	Event getEventDetailsById(int id);
+	
+	
 }

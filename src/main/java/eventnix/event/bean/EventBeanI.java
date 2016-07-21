@@ -13,5 +13,7 @@ public interface EventBeanI {
 	 void approve (int id);
 
 	void disapprove(int id);
+	
+	String getEventDetails(int id);
 
 }

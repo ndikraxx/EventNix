@@ -51,7 +51,7 @@ public class EventBean implements EventBeanI{
 		}
 		
 		sb.append("]");
-		System.out.println(sb.toString());
+	
 		return sb.toString();
 		
 	}
@@ -64,6 +64,15 @@ public class EventBean implements EventBeanI{
 	public void disapprove (int id){
 		eventDao.disapprove(id);
 	}
+
+	public String getEventDetails(int id) {
+		Event event = eventDao.getEventDetailsById(id);
+		 return event.getEvent();
+		
+	}
+	
+
+	
 	
 
 }

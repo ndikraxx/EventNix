@@ -4,12 +4,12 @@ var login = App.extend(App.Cmp, {
 	modelId: 'login',
 	modelName: 'Login',
 	model: [{
-		id: 'username',
-		name: 'username',
+		id: 'phone',
+		name: 'phone',
 		type: 'text',
 		required: 'required',
-		placeholder: 'Username',
-		span: 'fa fa-user'
+		placeholder: 'Enter your phone number',
+		span: 'fa fa-phone'
 		
 	},{
 		id: 'password',

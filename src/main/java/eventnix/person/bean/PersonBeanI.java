@@ -6,9 +6,11 @@ public interface PersonBeanI{
 	
 	void save(Person person);
 	
-	boolean loginStatus (String username, String password);
+	boolean loginStatus (String phone, String password);
 
-	String userType(String username, String password);
+	String userType(String phone, String password);
 	
-	String lastName(String username, String password);
+	String lastName(String phone, String password);
+
+	String userId(String phone, String password);
 }

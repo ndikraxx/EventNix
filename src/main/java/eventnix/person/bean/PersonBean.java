@@ -30,29 +30,27 @@ public class PersonBean implements PersonBeanI{
 		
 	}
 
-	public boolean loginStatus(String username, String password) {
+	public boolean loginStatus(String phone, String password) {
 		
-		if(personDao.login(username, password) == true)
+		if(personDao.login(phone, password) == true)
 			return true;
 		else 
 			return false;
 	}
 
-	public String userType(String username, String password) {
-		return personDao.userType(username, password);
+	public String userType(String phone, String password) {
+		return personDao.userType(phone, password);
 	}
 
-	public String lastName(String username, String password) {
+	public String lastName(String phone, String password) {
 		
-		return personDao.userDetails(username, password);
+		return personDao.userDetails(phone, password);
 	}
 
-/*	public String userType(String username, String password){
-		if(personDao.login(username, password)== true){
-		 return personDao.userType(username, password);	
+	public String userId(String phone, String password){
+
+		 return personDao.userId(phone, password);	
 	}
-		return null;
-}*/
 	
 	
 }

@@ -51,16 +51,11 @@ PersonBeanI personBean;
 		 
 		 person.setFirstName(request.getParameter("firstname"));
 		 person.setLastName(request.getParameter("lastname"));
-		 
-		 person.setLogin(new Login());
-		 person.getLogin().setUsername(request.getParameter("username"));
-		
-		person.getLogin().setPassword(hashedPass);
-		 person.getLogin().setUserType(request.getParameter("usertype"));
-
-		 person.setAddress(new Address());
-		 person.getAddress().setEmail(request.getParameter("email"));
-		 person.getAddress().setPhoneNumber(request.getParameter("phone"));
+		 person.setPassword(hashedPass);
+		 person.setUserType(request.getParameter("usertype"));
+		 person.setIdentification(request.getParameter("id"));
+		 person.setEmail(request.getParameter("email"));
+		 person.setPhoneNumber(request.getParameter("phone"));
 		 
 		personBean.save(person);
 	}

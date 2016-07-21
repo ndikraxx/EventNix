@@ -8,10 +8,12 @@ import eventnix.person.model.Person;
 
 public interface PersonDaoI extends GenericDaoI<Person, Long>{
 	 
-	boolean login(String username, String password);
+	boolean login(String phone, String password);
 
-	String userDetails(String username, String password);
+	String userDetails(String phone, String password);
 
-	String userType(String username, String password);
+	String userType(String phone, String password);
+
+	String userId(String phone, String password);
 
 }

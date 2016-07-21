@@ -18,6 +18,7 @@ import javax.servlet.http.HttpSession;
 import eventnix.person.bean.PersonBeanI;
 import eventnix.person.model.Person;
 
+
 @WebServlet("/login")
 public class LoginAction extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -31,7 +32,7 @@ public class LoginAction extends HttpServlet {
 
 	public void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		String username = request.getParameter("username");
+		String phone = request.getParameter("phone");
 		
 		String password = request.getParameter("password");
 		
@@ -48,19 +49,24 @@ public class LoginAction extends HttpServlet {
 
 		PrintWriter out = response.getWriter();
 		
-		boolean login = personBean.loginStatus(username, hashedPass);
+		boolean login = personBean.loginStatus(phone, hashedPass);
 		
 		
 
 		try{
 			if (login == true) {
-				String uType = personBean.userType(username, hashedPass).toString();
+				String uType = personBean.userType(phone, hashedPass).toString();
 				
-				String lastName = personBean.lastName(username, hashedPass).toString();
+				String lastName = personBean.lastName(phone, hashedPass).toString();
 				
 				HttpSession session = request.getSession();
 				
 				session.setAttribute("sessionLname", lastName);
+				 
+				
+				String uid = personBean.userId(phone, hashedPass);
+				
+				session.setAttribute("uid", uid);
 				
 				if("Attender".equals(uType)){
 					
