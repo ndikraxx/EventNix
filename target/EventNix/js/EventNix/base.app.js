@@ -149,7 +149,7 @@ App.Cmp = {
 				httpUrl: context.httpUrl+ '/approve?id='+id,
 				responseTarget: context.responseTarget,
 				updateTarget: function (resp){
-					
+
 				}
 			});
 		},
@@ -167,6 +167,115 @@ App.Cmp = {
 			});
 		},
 		
+		loadOrganizerEvents: function (){
+			var context = this;
+			context.ajaxRequest.call({
+				httpMethod: context.httpMethod,
+				httpUrl: './addEvent/loadOrganizerEvent',
+				responseTarget: 'ajax-content',
+				updateTarget: function (resp){
+				var json = JSON.parse(resp)
+				var div = '<div class="btn-group" role="group" aria-label="...">';
+				json.forEach(function (el){
+					var buttonId = "eventId-"+el.id;
+					div+= '<button type="button" class="btn btn-primary" id ='+buttonId+'>'+el.name+'|</button>'
+					
+				});
+				div+='</div>';
+				context.getEl('ajax-content').innerHTML = div;
+				if (context.getEl('ajax-content').innerHTML = div){
+					var json = JSON.parse(resp)
+					json.forEach(function (el){
+						var buttonId = "eventId-"+el.id;
+					 context.getEl(buttonId).addEventListener("click", function (){
+						 context.viewAttendersList(el.id);
+					 });
+				 });
+				}
+			}
+			});
+			
+		},
+		
+		showOrganizerEventsProgress : function(){
+			var context = this;
+			context.ajaxRequest.call({
+				httpMethod: context.httpMethod,
+				httpUrl: './addEvent/loadOrganizerEvent',
+				responseTarget: 'ajax-content',
+				updateTarget: function (resp){
+					var table = '<table class= "table table-bordered table-striped table-condensed">'
+						table += "<tr>"
+							table +='<th>Event Name</th>'
+							table +='<th>Venue</th>'
+							table +='<th>Price</th>'
+							table +='<th>category</th>'
+							table +='<th>description</th>'
+							table +='<th>status</th>'
+							table +='<th>ticketsAvailable</th>'
+							table +='<th>image</th>'
+							table +='<th>startDate</th>'
+							table +='<th>endDate</th>'	
+								
+					table+="</tr>";
+					
+					var json = JSON.parse(resp)
+					json.forEach(function (el){
+						table+='<tr>'
+						table+='<td>'+el.name+'</td>'
+						table+='<td>'+el.venue+'</td>'
+						table+='<td>'+el.price+'</td>'
+						table+='<td>'+el.category+'</td>'
+						table+='<td>'+el.description+'</td>'
+						table+='<td>'+el.status+'</td>'
+						table+='<td>'+el.ticketsAvailable+'</td>'
+						table+='<td><img  height= "70px" width = "70px" src="myimages/'+el.imageName+'"/></td>'
+						table+='<td>'+el.startDate+'</td>'
+						table+='<td>'+el.endDate+'</td>'
+						table += '</tr>';
+						
+					});
+					table+="</table>";
+					context.getEl('ajax-content').innerHTML = table;
+			}
+			});
+		},
+		
+		viewAttendersList: function (id){
+			var context = this;
+			context.ajaxRequest.call({
+				httpMethod: context.httpMethod,
+				httpUrl: './ticket/viewAttendersList?eventid='+id,
+				responseTarget: 'nested-attenders-list',
+				updateTarget: function (resp){
+					var table = '<table class= "table table-bordered table-striped table-condensed">'
+						table += "<tr>"
+							table +='<th>Firstname</th>'
+							table +='<th>Lastname</th>'
+							table +='<th>Email</th>'
+							table +='<th>phone</th>'
+							table +='<th>Tickets</th>'
+							table +='<th>Amount</th>'
+					table+="</tr>";
+					
+					var json = JSON.parse(resp)
+					json.forEach(function (el){
+						table+='<tr>'
+						table+='<td>'+el.firstname+'</td>'
+						table+='<td>'+el.lastname+'</td>'
+						table+='<td>'+el.email+'</td>'
+						table+='<td>'+el.phone+'</td>'
+						table+='<td>'+el.tickets+'</td>'
+						table+='<td>'+el.amount+'</td>'
+						table += '</tr>';
+						
+					});
+					table+="</table>";
+					context.getEl('ajax-content').innerHTML = table;
+				}
+			});
+			
+		},
 		
 		listView : function() {
 			var me = this;
@@ -186,6 +295,8 @@ App.Cmp = {
 				table+="<th></th>";
 				table+="<th></th></tr>";
 					var jsonRecords = JSON.parse(resp);
+					var obj = Object.keys(jsonRecords);
+					console.log ("this is the object " +obj)
 					jsonRecords.forEach(function(el) {
 						var approve = "approve-"+el.id; 
 						var disapprove ="disapprove-"+el.id;
@@ -197,7 +308,10 @@ App.Cmp = {
 						}
 						
 						me.model.forEach(function (model){
+							if (model.name != "imageName")
 							table += '<td>'  +el[model.name] + '</td>'
+							
+							
 							
 								
 						});
@@ -336,6 +450,8 @@ App.Cmp = {
 		}
 			});
 		},
+		
+
 		bookEvent: function (id, name, price, tickets){
 			var context = this;
 			context.ajaxRequest.call({
@@ -395,8 +511,8 @@ App.Cmp = {
 						if (el.status == 'Approved'){
 							div += ' <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 box-shadow">';
 							div +=  '<div class="thumbnail">';
-							//console.log(buttonId);
-							div+= '<img src="img/home/featured-collection/featured-collection-01.jpg" alt="feature-collection-image">';	
+							
+							div+= '<img  height= "350px" width = "350px" src="myimages/'+el.imageName+'"/>';	
 			                 div+='<div class="caption">';
 						div += '<h4>'+el.name+'</h4>';
 						div += '<p>'+el.venue+'</p>';

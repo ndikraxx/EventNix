@@ -1,6 +1,7 @@
 package eventnix.person.model;
 
 import javax.persistence.Column;
+import javax.persistence.Embeddable;
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -9,8 +10,10 @@ import javax.persistence.Id;
 
 import eventnix.common.model.Address;
 import eventnix.common.model.Login;
+import eventnix.ticket.model.Ticket;
 
 @Entity
+@Embeddable
 public class Person {
 	
 	@Id
@@ -37,7 +40,8 @@ public class Person {
 	
 	@Column(name = "user_type")
 	private String userType;
-
+	
+	
 	public String getPhoneNumber() {
 		return phoneNumber;
 	}

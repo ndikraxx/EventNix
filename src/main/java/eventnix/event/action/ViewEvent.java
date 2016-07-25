@@ -47,7 +47,7 @@ public class ViewEvent extends HttpServlet{
 		String userId=  req.getSession().getAttribute("uid").toString ();
 		System.out.println(userId);
 		ticket.setUserId(Long.parseLong(userId));
-		ticket.setEventId(Long.parseLong(eventId));
+		ticket.setEventId(Integer.parseInt(eventId));
 		ticket.setAmount(Integer.parseInt(eventPrice));
 		ticket.setTicketsBooked(Integer.parseInt(ticketQuantity));
 		ticket.setPhoneNumber(req.getParameter("phone"));

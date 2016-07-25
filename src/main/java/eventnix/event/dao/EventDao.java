@@ -33,5 +33,17 @@ public class EventDao extends GenericDao<Event, Long> implements EventDaoI {
 	
 
 	}
-
+	
+	public List <Event> getUserPostedEvent (long id) {
+		return em.createQuery("from Event e where e.userId=:id").setParameter("id", id).getResultList();
+		
+	}
+	
+	public int countAllUserPostedEvents (long id){
+		List result =  em.createQuery("select count(id) from Event where userId=:id").setParameter("id", id).getResultList();
+	
+		
+		return ((Long) result.get(0)).intValue();
+		
+	}
 }

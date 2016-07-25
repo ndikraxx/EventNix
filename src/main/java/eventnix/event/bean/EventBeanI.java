@@ -16,4 +16,6 @@ public interface EventBeanI {
 	
 	String getEventDetails(int id);
 
+	String userPostedEventsJSON(long id);
+
 }

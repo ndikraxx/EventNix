@@ -46,7 +46,7 @@
 								if (request.getSession().getAttribute("sessionLname") != null) {
 									out.println(request.getSession().getAttribute("sessionLname")
 											.toString().toUpperCase());}%></a>
-							<a href="#" class="btn btn-primary btn-md">Logout</a></div>
+							<a href="./login"  name= "logout" class="btn btn-primary btn-md">Logout</a></div>
 					</div>
 				</div>
 			</div>

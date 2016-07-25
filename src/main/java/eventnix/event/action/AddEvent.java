@@ -10,6 +10,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import eventnix.event.bean.EventBeanI;
 import eventnix.event.model.Event;
@@ -23,12 +24,12 @@ public class AddEvent extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException, IOException {
-		this.list(resp);
+		
 		
 		
 		String [] pathCmp = req.getRequestURI().split("/");
 		String path = pathCmp[pathCmp.length-1];
-		
+		System.out.println(path);
 		if(path.equalsIgnoreCase("approve")){
 			int id = Integer.parseInt(req.getParameter("id"));
 			eventBean.approve(id);
@@ -38,25 +39,21 @@ public class AddEvent extends HttpServlet {
 			int id = Integer.parseInt(req.getParameter("id"));
 			eventBean.disapprove(id);
 		}
-		
+		else if (path.equalsIgnoreCase("loadOrganizerEvent"))
+		{
+			HttpSession session = req.getSession();
+			Long id = Long.parseLong(session.getAttribute("uid").toString());
+			PrintWriter out = resp.getWriter();
+	        out.println(eventBean.userPostedEventsJSON(id));
+		}
+		else {
+			this.list(resp);
+		}
 		
 		
 	}
 
-	@Override
-	protected void doPost(HttpServletRequest req, HttpServletResponse resp)
-			throws ServletException, IOException {
-	Event event = new Event ();
-	event.setName(req.getParameter("name"));
-	event.setVenue(req.getParameter("venue"));
-	event.setPrice(req.getParameter("price"));
-	String tickets = req.getParameter("ticketsAvailable");
-	event.setTickets(Integer.parseInt(tickets));
-	event.setCategory(req.getParameter("category"));
-	event.setDescription(req.getParameter("description"));
-	eventBean.save(event);
-	}
-	
+
 	public void list(HttpServletResponse resp)
 			throws ServletException, IOException {
 		PrintWriter out = resp.getWriter();

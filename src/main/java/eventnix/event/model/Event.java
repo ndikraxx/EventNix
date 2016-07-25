@@ -24,7 +24,7 @@ public class Event {
 	@Column
 	private String category;
 	
-	@Column
+	@Column(length = 6000)
 	private String description;
 	
 	@Column 
@@ -33,6 +33,60 @@ public class Event {
 	@Column 
 	private  int tickets;
 	
+	@Column  
+	private String imageName ;
+	
+	@Column (columnDefinition= "DATETIME")
+	private String startDateTime;
+	
+	@Column (columnDefinition= "DATETIME")
+	private String endDateTime;
+	
+	@Column long userId;
+	
+	@Column (columnDefinition = "DATETIME") 
+	private String postedDateTime;
+	
+	public String getPostedDateTime() {
+		return postedDateTime;
+	}
+
+	public void setPostedDateTime(String postedDateTime) {
+		this.postedDateTime = postedDateTime;
+	}
+
+	public String getImageName() {
+		return imageName;
+	}
+
+	public void setImageName(String imageName) {
+		this.imageName = imageName;
+	}
+
+	public String getStartDateTime() {
+		return startDateTime;
+	}
+
+	public void setStartDateTime(String startDateTime) {
+		this.startDateTime = startDateTime;
+	}
+
+	public String getEndDateTime() {
+		return endDateTime;
+	}
+
+	public void setEndDateTime(String endDateTime) {
+		this.endDateTime = endDateTime;
+	}
+	
+	public long getUserId() {
+		return userId;
+	}
+
+	public void setUserId(long userId) {
+		this.userId = userId;
+	}
+
 	public int getTickets() {
 		return tickets;
 	}
@@ -107,7 +161,13 @@ public class Event {
 			append("\"price\": \"").append(getPrice()).append("\" , ").
 			append("\"category\": \"").append(getCategory()).append("\" , ").
 			append("\"description\": \"").append(getDescription()).append("\", ").
-			append("\"status\": \"").append(getStatus()).append("\" ").
+			append("\"status\": \"").append(getStatus()).append("\", ").
+			append("\"ticketsAvailable\": \"").append(getTickets()).append("\", ").
+			append("\"imageName\": \"").append(getImageName()).append("\", ").
+			append("\"startDate\": \"").append(getStartDateTime()).append("\", ").
+			append("\"endDate\": \"").append(getEndDateTime()).append("\", ").
+			append("\"timePosted\": \"").append(getPostedDateTime()).append("\", ").
+			append("\"userId\": \"").append(getUserId()).append("\"").
 			append("}");
 		return builder.toString();
 	}

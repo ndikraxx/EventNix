@@ -41,12 +41,12 @@
 				<div>
 
 					<div class="navbar-login navbar-login-session navbar-right">
-						<div class="btn-group">
+					<div class="btn-group">
 							<a class ="btn btn-warning btn-md">Welcome, <%
 								if (request.getSession().getAttribute("sessionLname") != null) {
 									out.println(request.getSession().getAttribute("sessionLname")
 											.toString().toUpperCase());}%></a>
-							<a href="#" class="btn btn-primary btn-md">Logout</a></div>
+							<a href="./login"  name= "logout" class="btn btn-primary btn-md">Logout</a></div>
 					</div>
 				</div>
 			</div>
@@ -73,15 +73,20 @@
                             <i class="fa fa-angle-left pull-right"></i>
                         </a>
                         <ul class="treeview-menu">
-								<li><a  onclick="showeventform()"><i class="fa fa-circle-o"></i>Create a new Event<!--Todo List--></a></li>
-                            <li><a href="#" onclick ="eventform.show()"><i class="fa fa-circle-o"></i> View Posted Event Details <!-- Draggable Portlet--></a></li>
+								<li><a  href="eventform.jsp"><i class="fa fa-circle-o"></i>Create a new Event<!--Todo List--></a></li>
+                            <li><a href="#" onclick ="App.Cmp.showOrganizerEventsProgress()"><i class="fa fa-circle-o"></i> View Posted Event Details <!-- Draggable Portlet--></a></li>
                            </ul>
                     </li>
                     <li class="treeview">
                         <a onclick ="">
                             <i class="fa fa-users"></i>
                             <span>List of Event Attenders <!--Charts--></span>
-
+								<i class="fa fa-angle-left pull-right"></i>
+                        </a>
+                        <ul class="treeview-menu">
+								<li><a  onclick="App.Cmp.loadOrganizerEvents()"><i class="fa fa-circle-o"></i>View According to posted Events<!--Todo List--></a></li>
+                            
+                           </ul>
                         </a>
                     </li>
                     <li class="treeview">
@@ -117,21 +122,34 @@
                     <!-- start:AJAX Content to change depending on the item clicked -->
                     <div class="col-lg-12 flot-index" id= "ajax-content">
                         <div class="row">
-                            <div class="col-sm-6">
-                                <section>
-                                    
+                            <div class="col-sm-6"  id="nested-attenders-list">
+                                  
                               
-                                </section>
+                          
                             </div>
-                            <div class="col-sm-6">
                             
-
-                            </div>
                         </div>
                     </div>
                     <!-- end:AJAX content-->
 
+				        <script type="text/javascript">
+				            $(function () {
+				                $('#datetimepicker2').datetimepicker({
+				                    locale: 'en',
+				                  
+				                });
+				            });
+				        </script>
 
+				 <script type="text/javascript">
+				            $(function () {
+				                $('#datetimepicker3').datetimepicker({
+				                    locale: 'en',
+				                  
+				            
+				                });
+				            });
+				        </script> 
 
                 </div>
                 <!-- end:content -->

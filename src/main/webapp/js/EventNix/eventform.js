@@ -36,13 +36,19 @@ var eventform = App.extend(App.Cmp, {
 		type: 'text',
 		placeholder: 'Enter the start date', 
 		span: ' fa fa-certificate '
-	},/*{
-		id: 'image',
-		name: 'image',
-		placeholder: 'Select image',
-		type: 'file',
-		span: ' fa fa-file-image-o'
-	},*/{
+	},{
+		name: 'endDate'
+		
+		
+		
+		
+	},
+{
+		name: 'imageName'
+		
+		
+		
+	},{
 		type: 'select',
 		id: 'category',
 		name: 'category',

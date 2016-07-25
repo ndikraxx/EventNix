@@ -71,6 +71,31 @@ public class EventBean implements EventBeanI{
 		
 	}
 	
+	public String userPostedEventsJSON (long id){
+		//Map<String, Object> filter = new HashMap<String, Object>();
+		List<Event> events = eventDao.getUserPostedEvent(id);
+		
+		System.out.println(events);
+		StringBuilder sb = new StringBuilder();
+		sb.append("[");
+		
+		int count = eventDao.countAllUserPostedEvents(id);
+	
+		for(Event event : events){
+			sb.append(event.getEvent());
+			
+			count--;
+			
+			if(count >= 1)
+				sb.append(",");
+		}
+		
+		sb.append("]");
+	
+		return sb.toString();
+		
+	
+	}
 
 	
 	
