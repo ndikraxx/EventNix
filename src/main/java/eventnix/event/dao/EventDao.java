@@ -33,7 +33,12 @@ public class EventDao extends GenericDao<Event, Long> implements EventDaoI {
 	
 
 	}
-	
+	/*public List <Object> updateAvailableTickets(){
+		List <Object> availableTickets = new ArrayList <Object>();
+		List <Object []> result = em.createNativeQuery("select count(ticke");
+		return null;
+		
+	}*/
 	public List <Event> getUserPostedEvent (long id) {
 		return em.createQuery("from Event e where e.userId=:id").setParameter("id", id).getResultList();
 		

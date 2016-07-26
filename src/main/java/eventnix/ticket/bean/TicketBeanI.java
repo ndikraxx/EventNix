@@ -13,4 +13,6 @@ public interface TicketBeanI {
 
 	String attendersListJSON(int id);
 
+	void updatePayments();
+
 }

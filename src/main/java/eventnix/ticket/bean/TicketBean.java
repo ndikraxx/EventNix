@@ -53,7 +53,7 @@ public class TicketBean implements TicketBeanI {
 		sb.append("[");
 		
 		int count = ticketDao.countAttendersList(id);
-		System.out.println("the count is attenders "+count);
+
 		for(Object ticket : tickets){
 			sb.append(((Ticket) ticket).getattendersListJson());
 			
@@ -68,6 +68,10 @@ public class TicketBean implements TicketBeanI {
 		return sb.toString();
 		
 	
+	}
+	
+	public void updatePayments(){
+		ticketDao.updatePayments();
 	}
 
 	

@@ -36,6 +36,8 @@ public class TicketAction extends HttpServlet {
 			out.println(ticketBean.attendersListJSON(eventId));
 			
 		}
+		
+		ticketBean.updatePayments();
 	}
 
 }

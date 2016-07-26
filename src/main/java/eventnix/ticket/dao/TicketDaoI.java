@@ -11,6 +11,13 @@ public interface TicketDaoI extends GenericDaoI<Ticket, Long>{
 
 	List<Object> attendersList(int id);
 
-	int countAttendersList(int id); 
+	int countAttendersList(int id);
+
+	List<Object> confirmedPayments(int id);
+
+	void updatePayments();
+
+	String numberTickets();
+
 
 }

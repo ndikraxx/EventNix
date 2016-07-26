@@ -211,7 +211,8 @@
 		<script type="text/javascript" src="js/EventNix/foodandDrinks.js"></script>
 		 <script src ="js/EventNix/showEventDetails.js"></script>
 		 <script src ="js/EventNix/payment.js"></script>
-		 
+		
+		 <script src=" js/EventNix/refreshPayments.js"></script>
     <script src="plugins/jquery-ui/jquery-ui.js"></script>
     <script src="plugins/bootstrap/js/bootstrap.min.js"></script>
     <script src="plugins/rs-plugin/js/jquery.themepunch.tools.min.js"></script>

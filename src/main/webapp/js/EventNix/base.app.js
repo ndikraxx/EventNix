@@ -256,6 +256,7 @@ App.Cmp = {
 							table +='<th>phone</th>'
 							table +='<th>Tickets</th>'
 							table +='<th>Amount</th>'
+							table +='<th>Amount Paid</th>'
 					table+="</tr>";
 					
 					var json = JSON.parse(resp)
@@ -267,6 +268,7 @@ App.Cmp = {
 						table+='<td>'+el.phone+'</td>'
 						table+='<td>'+el.tickets+'</td>'
 						table+='<td>'+el.amount+'</td>'
+						table+='<td>'+el.amountPaid+'</td>'
 						table += '</tr>';
 						
 					});

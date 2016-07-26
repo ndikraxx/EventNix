@@ -46,6 +46,17 @@ public class Ticket {
 		private String email;
 		@Transient
 		 private String phone;
+		@Transient
+		private int amountPaid;
+		
+		
+	public int getAmountPaid() {
+			return amountPaid;
+		}
+
+		public void setAmountPaid(int amountPaid) {
+			this.amountPaid = amountPaid;
+		}
 
 	public String getFirstName() {
 	return firstName;
@@ -152,8 +163,11 @@ public void setPhone(String phone) {
 			append("\"email\": \"").append(getEmail()).append("\" , ").
 			append("\"phone\": \"").append(getPhoneNumber()).append("\" , ").
 			append("\"tickets\": \"").append(getTicketsBooked()).append("\" , ").
-			append("\"amount\": \"").append(getAmount()).append("\"").
+			append("\"amount\": \"").append(getAmount()).append("\", ").
+			append("\"amountPaid\": \"").append(getAmountPaid()).append("\"").
 			append("}");
 		return builder.toString();
 	}
+
+
 }

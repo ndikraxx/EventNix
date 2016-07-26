@@ -118,6 +118,7 @@ public class FileUpload extends HttpServlet {
 							event.setEndDateTime(end);
 							event.setImageName(imageName);
 							event.setDescription(descript);
+							event.setRemainingTickets(Integer.parseInt(ticketNumber));
 							event.setUserId(Long.parseLong(userId));
 							DateFormat simDateFormat = new SimpleDateFormat(
 									"yyyy/MM/dd HH:mm:ss");

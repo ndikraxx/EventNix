@@ -9,44 +9,56 @@ import javax.persistence.Id;
 @Entity
 public class Event {
 	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int id;
-	
+
 	@Column
 	private String name;
-	
+
 	@Column
 	private String venue;
-	
+
 	@Column
 	private String price;
-	
+
 	@Column
 	private String category;
-	
+
 	@Column(length = 6000)
 	private String description;
-	
-	@Column 
+
+	@Column
 	private String status;
-	
-	@Column 
-	private  int tickets;
-	
-	@Column  
-	private String imageName ;
-	
-	@Column (columnDefinition= "DATETIME")
+
+	@Column
+	private int tickets;
+
+	@Column
+	private String imageName;
+
+	@Column(columnDefinition = "DATETIME")
 	private String startDateTime;
-	
-	@Column (columnDefinition= "DATETIME")
+
+	@Column(columnDefinition = "DATETIME")
 	private String endDateTime;
-	
-	@Column long userId;
-	
-	@Column (columnDefinition = "DATETIME") 
+
+	@Column
+	long userId;
+
+	@Column(columnDefinition = "DATETIME")
 	private String postedDateTime;
-	
+
+	@Column
+	private int remainingTickets;
+
+	public int getRemainingTickets() {
+		return remainingTickets;
+	}
+
+	public void setRemainingTickets(int remainingTickets) {
+		this.remainingTickets = remainingTickets;
+	}
+
 	public String getPostedDateTime() {
 		return postedDateTime;
 	}
@@ -78,7 +90,7 @@ public class Event {
 	public void setEndDateTime(String endDateTime) {
 		this.endDateTime = endDateTime;
 	}
-	
+
 	public long getUserId() {
 		return userId;
 	}
@@ -110,12 +122,11 @@ public class Event {
 	public void setId(int id) {
 		this.id = id;
 	}
-	
+
 	public String getName() {
 		return name;
 	}
 
-	
 	public void setName(String name) {
 		this.name = name;
 	}
@@ -151,27 +162,29 @@ public class Event {
 	public void setDescription(String description) {
 		this.description = description;
 	}
-	
-	public String getEvent(){
+
+	public String getEvent() {
 		StringBuilder builder = new StringBuilder();
-		builder.append("{").
-			append("\"id\": \"").append(getId()).append("\" , ").
-			append("\"name\": \"").append(getName()).append("\" , ").
-			append("\"venue\": \"").append(getVenue()).append("\" , ").
-			append("\"price\": \"").append(getPrice()).append("\" , ").
-			append("\"category\": \"").append(getCategory()).append("\" , ").
-			append("\"description\": \"").append(getDescription()).append("\", ").
-			append("\"status\": \"").append(getStatus()).append("\", ").
-			append("\"ticketsAvailable\": \"").append(getTickets()).append("\", ").
-			append("\"imageName\": \"").append(getImageName()).append("\", ").
-			append("\"startDate\": \"").append(getStartDateTime()).append("\", ").
-			append("\"endDate\": \"").append(getEndDateTime()).append("\", ").
-			append("\"timePosted\": \"").append(getPostedDateTime()).append("\", ").
-			append("\"userId\": \"").append(getUserId()).append("\"").
-			append("}");
+		builder.append("{").append("\"id\": \"").append(getId())
+				.append("\" , ").append("\"name\": \"").append(getName())
+				.append("\" , ").append("\"venue\": \"").append(getVenue())
+				.append("\" , ").append("\"price\": \"").append(getPrice())
+				.append("\" , ").append("\"category\": \"").append(getCategory()).append("\" , ")
+				.append("\"description\": \"").append(getDescription()).append("\", ")
+				.append("\"status\": \"").append(getStatus())
+				.append("\", ").append("\"ticketsAvailable\": \"")
+				.append(getTickets()).append("\", ")
+				.append("\"ticketsRemaining\": \"")
+				.append(getRemainingTickets()).append("\", ")
+				.append("\"imageName\": \"").append(getImageName())
+				.append("\", ").append("\"startDate\": \"")
+				.append(getStartDateTime()).append("\", ")
+				.append("\"endDate\": \"").append(getEndDateTime())
+				.append("\", ").append("\"timePosted\": \"")
+				.append(getPostedDateTime()).append("\", ")
+				.append("\"userId\": \"").append(getUserId()).append("\"")
+				.append("}");
 		return builder.toString();
 	}
-
-
 
 }
