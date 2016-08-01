@@ -186,5 +186,29 @@ public class Event {
 				.append("}");
 		return builder.toString();
 	}
+	
+	public String ticketSoldJSON() {
+		StringBuilder builder = new StringBuilder();
+		builder.append("{").append("\"label\": \"").append(getTickets()).append("\" , ").
+		append("\"val\": \"").append(getName())
+				.append("\" , ").append("\"venue\": \"").append(getVenue())
+				.append("\" , ").append("\"price\": \"").append(getPrice())
+				.append("\" , ").append("\"category\": \"").append(getCategory()).append("\" , ")
+				.append("\"description\": \"").append(getDescription()).append("\", ")
+				.append("\"status\": \"").append(getStatus())
+				.append("\", ").append("\"ticketsAvailable\": \"")
+				.append(getTickets()).append("\", ")
+				.append("\"ticketsRemaining\": \"")
+				.append(getRemainingTickets()).append("\", ")
+				.append("\"imageName\": \"").append(getImageName())
+				.append("\", ").append("\"startDate\": \"")
+				.append(getStartDateTime()).append("\", ")
+				.append("\"endDate\": \"").append(getEndDateTime())
+				.append("\", ").append("\"timePosted\": \"")
+				.append(getPostedDateTime()).append("\", ")
+				.append("\"userId\": \"").append(getUserId()).append("\"")
+				.append("}");
+		return builder.toString();
+	}
 
 }

@@ -17,6 +17,18 @@ public interface EventDaoI extends GenericDaoI<Event, Long> {
 	List<Event> getUserPostedEvent(long id);
 
 	int countAllUserPostedEvents(long id);
+
+	List<Event> searchByName(String searchParameter);
+
+	List<Event> searchByVenue(String searchParameter);
+
+	int countofSearchByName(String searchParamter);
+
+	int countofSearchByVenue(String searchParameter);
+
+	List<Event> searchByDesc(String searchParameter);
+
+	int countofSearchByDesc(String searchParameter);
 	
 	
 }

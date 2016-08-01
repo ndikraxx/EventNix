@@ -12,6 +12,7 @@ import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
+
 import eventnix.event.dao.EventDaoI;
 import eventnix.event.model.Event;
 
@@ -32,6 +33,12 @@ public class EventBean implements EventBeanI{
 	public void save(Event event) {
 		eventDao.save(event);
 	}
+
+	public List<Event> list() {
+		return eventDao.list(new Event ());
+		
+	}
+
  
 	public String listInJson() {
 		Map<String, Object> filter = new HashMap<String, Object>();
@@ -97,7 +104,85 @@ public class EventBean implements EventBeanI{
 	
 	}
 
+
+	public String searchByName(String searchParameter) {
+		
+	List<Event> events = eventDao.searchByName(searchParameter);
+		
 	
+		StringBuilder sb = new StringBuilder();
+		sb.append("[");
+		
+		int count = eventDao.countofSearchByName(searchParameter);
+	
+		for(Event event : events){
+			sb.append(event.getEvent());
+			
+			count--;
+			
+			if(count >= 1)
+				sb.append(",");
+		}
+		
+		sb.append("]");
+	System.out.println(sb);
+		return sb.toString();
+		
+
+	}
+
+
+	public String searchByVenue(String searchParameter) {
+		List<Event> events = eventDao.searchByVenue(searchParameter);
+		
+		
+		StringBuilder sb = new StringBuilder();
+		sb.append("[");
+		
+		int count = eventDao.countofSearchByVenue(searchParameter);
+	
+		for(Event event : events){
+			sb.append(event.getEvent());
+			
+			count--;
+			
+			if(count >= 1)
+				sb.append(",");
+		}
+		
+		sb.append("]");
+	System.out.println(sb);
+		return sb.toString();
+		
+
+	}
+
+	
+	public String searchByDesc(String searchParameter) {
+		List<Event> events = eventDao.searchByDesc(searchParameter);
+		
+		
+		StringBuilder sb = new StringBuilder();
+		sb.append("[");
+		
+		int count = eventDao.countofSearchByDesc(searchParameter);
+	
+		for(Event event : events){
+			sb.append(event.getEvent());
+			
+			count--;
+			
+			if(count >= 1)
+				sb.append(",");
+		}
+		
+		sb.append("]");
+	System.out.println(sb);
+		return sb.toString();
+		
+
+	}
+
 	
 
 }

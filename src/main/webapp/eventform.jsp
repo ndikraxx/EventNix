@@ -15,6 +15,7 @@
 <link href="js/EventNix/boot/datetimepicker.min.css" rel="stylesheet">
 <script src="js/EventNix/boot/jquery-2.1.4.js"></script>
      <script src="js/EventNix/boot/datetimepicker.min.js"></script>
+      <script src="js/alertify.min.js"></script>
 
 <meta charset="UTF-8">
 	<meta content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no' name='viewport'>
@@ -172,10 +173,15 @@
                     
                 </div>
             </div>
+            
       
 
         
         <script type="text/javascript">
+        function beforeSubmit(){
+        alertify.error("Your event has successfully been created and is pending approval");
+        }
+        
         $(function () {
             $('#datetimepicker2').datetimepicker();
             $('#datetimepicker3').datetimepicker({
@@ -220,7 +226,7 @@
       			</div>
       	<br>
       		
-      		<button type = "submit" class="btn btn-lg btn-info text-center"  id="submita" name="submit"  >Create the Event</button>
+      		<button type = "submit" class="btn btn-lg btn-info text-center"  id="submita" name="submit" onclick = "beforeSubmit()">Create the Event</button>
       			      	</form>  
       		</div>
       		</div>

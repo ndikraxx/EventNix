@@ -19,5 +19,9 @@ public interface TicketDaoI extends GenericDaoI<Ticket, Long>{
 
 	String numberTickets();
 
+	List<Object> ticketsSoldPerDayPerEvent(int id);
+
+	int countTicketsPerDay(int id);
+
 
 }

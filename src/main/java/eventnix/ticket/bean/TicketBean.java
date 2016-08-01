@@ -63,6 +63,8 @@ public class TicketBean implements TicketBeanI {
 				sb.append(",");
 		}
 		
+		
+		
 		sb.append("]");
 	System.out.println("my JSON "+sb.toString());
 		return sb.toString();
@@ -73,7 +75,38 @@ public class TicketBean implements TicketBeanI {
 	public void updatePayments(){
 		ticketDao.updatePayments();
 	}
+	@Override
+	public List<Object> ticketsSoldPerDayPerEvent(int id) {
+		System.out.println(ticketDao.ticketsSoldPerDayPerEvent(id));
+		return ticketDao.ticketsSoldPerDayPerEvent(id);
+	}
 
+	@Override
+	public String ticketsPerDay (int id){
+		//Map<String, Object> filter = new HashMap<String, Object>();
+		List<Object> tickets=  ticketDao.ticketsSoldPerDayPerEvent(id);
+		
+		
+		StringBuilder sb = new StringBuilder();
+		sb.append("[");
+		
+		int count = ticketDao.countTicketsPerDay(id);
+		System.out.println("the count of dates is" +count);
+		for(Object ticket : tickets){
+			sb.append(((Ticket) ticket).getTicketsSoldPerDayJSN());
+			
+			count--;
+			
+			if(count >= 1)
+				sb.append(",");
+		}
+		
+		sb.append("]");
+	System.out.println(sb);
+		return sb.toString();
+		
+	
+	}
 	
 
 }

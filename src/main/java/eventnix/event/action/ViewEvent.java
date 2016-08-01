@@ -1,6 +1,9 @@
 package eventnix.event.action;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import javax.ejb.EJB;
 import javax.servlet.ServletException;
@@ -52,6 +55,9 @@ public class ViewEvent extends HttpServlet{
 		ticket.setTicketsBooked(Integer.parseInt(ticketQuantity));
 		ticket.setPhoneNumber(req.getParameter("phone"));
 		ticket.setTransactionNumber(req.getParameter("transaction"));
+		DateFormat format = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+		Date date = new Date();
+		ticket.setTicketdate(format.format(date));
 		ticketBean.save(ticket);
 	}
 

@@ -1,5 +1,5 @@
 var social = App.extend(App.Cmp, {
 	responseTarget: 'show-events',
-	page: 'Social',
+	page: 'Social and Networking',
 	httpUrl: "./addEvent"
 });

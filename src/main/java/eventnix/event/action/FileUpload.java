@@ -12,13 +12,13 @@ import java.util.List;
 import java.util.jar.Attributes.Name;
 
 import javax.ejb.EJB;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
 import javax.servlet.http.Part;
 
 import org.apache.commons.fileupload.FileItem;
@@ -73,8 +73,7 @@ public class FileUpload extends HttpServlet {
 						is.read(b);
 						String value = new String(b);
 
-						response.getWriter().println(
-								fieldName + ":" + value + "</br>");
+					
 						if (fieldName.equals("name")) {
 							name = value.toString();
 
@@ -106,7 +105,7 @@ public class FileUpload extends HttpServlet {
 
 						if (Upload.processFile(path, item)) {
 
-							response.getWriter().println("File uploaded ");
+							
 							imageName = item.getName().toString();
 							Event event = new Event();
 							event.setName(name);
@@ -125,6 +124,10 @@ public class FileUpload extends HttpServlet {
 							Date date = new Date();
 							event.setPostedDateTime(simDateFormat.format(date));
 							eventBean.save(event);
+							RequestDispatcher rd=request.getRequestDispatcher("organizer.jsp");  
+							
+							  
+							rd.forward(request, response);
 						} else {
 							response.getWriter().println("File failed");
 						}

@@ -39,6 +39,11 @@ public class AddEvent extends HttpServlet {
 			int id = Integer.parseInt(req.getParameter("id"));
 			eventBean.disapprove(id);
 		}
+		else if (path.equalsIgnoreCase("viewEvent")){
+			int id = Integer.parseInt(req.getParameter("eventid"));
+			PrintWriter out = resp.getWriter();
+			out.println(eventBean.getEventDetails(id));
+		}
 		else if (path.equalsIgnoreCase("loadOrganizerEvent"))
 		{
 			HttpSession session = req.getSession();
@@ -46,6 +51,7 @@ public class AddEvent extends HttpServlet {
 			PrintWriter out = resp.getWriter();
 	        out.println(eventBean.userPostedEventsJSON(id));
 		}
+		
 		else {
 			this.list(resp);
 		}

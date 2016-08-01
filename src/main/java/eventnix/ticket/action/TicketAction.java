@@ -31,10 +31,17 @@ public class TicketAction extends HttpServlet {
 			
 			int eventId =  Integer.parseInt(req.getParameter("eventid"));
 			
-			System.out.println ("the event id is " +eventId);
+			
 			
 			out.println(ticketBean.attendersListJSON(eventId));
 			
+		}
+		else if(path.equalsIgnoreCase("ticketsperday")){
+			
+			int id =  Integer.parseInt(req.getParameter("id"));
+			
+			System.out.println(ticketBean.ticketsPerDay(id));
+			out.println(ticketBean.ticketsPerDay(id));
 		}
 		
 		ticketBean.updatePayments();

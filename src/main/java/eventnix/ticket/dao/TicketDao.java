@@ -1,5 +1,6 @@
 package eventnix.ticket.dao;
 
+import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -38,19 +39,27 @@ public class TicketDao extends GenericDao<Ticket, Long> implements TicketDaoI {
 	
 	String ticketsBooked =result.get(0).toString();
 	
-	String query = "update Event e set e.remainingTickets=e.remainingTickets -:ticketsBooked where e.id=:id";
+	String query = "update Event e set e.remainingTickets=e.tickets -:ticketsBooked where e.id=:id";
 	em.createNativeQuery(query).setParameter("ticketsBooked", ticketsBooked).setParameter("id", id).executeUpdate();
 		
 		return attendersList;	
 	}
 	public int countAttendersList (int id){
-		List result = em.createQuery("select count(p.firstName) from Person p, Ticket t where p.id=t.userId and t.eventId=:id").
+		List <BigInteger> result = em.createNativeQuery("select count(*) from Ticket t, Person p, Payments pay where p.id=t.userId and t.eventId=:id and t.status = 'confirmed' and pay.amount >= (t.ticketsBooked * t.amount) and pay.trans = t.transactionNumber ").
 				setParameter("id", id).getResultList();
-		System.out.println("The count of attenders is "+result);
-		return ((Long) result.get(0)).intValue();
+		System.out.println("The count of disticnt dates is "+result);
+		return (result.get(0)).intValue();
 		
 	}
 	
+	@Override
+	public int countTicketsPerDay(int id){
+		
+		List result = em.createQuery("select count(DISTINCT t.ticketdate) from Ticket t where t.eventId=:id and t.status ='Confirmed' ").
+				setParameter("id", id).getResultList();
+		return ((Long) result.get(0)).intValue();
+		
+	}
 	public String numberTickets(){
 		return null;
 	}
@@ -66,6 +75,23 @@ public class TicketDao extends GenericDao<Ticket, Long> implements TicketDaoI {
 		List<Object> confirmedPayment = new ArrayList<Object> ();
 		
 		return null;
+	}
+	@Override
+	
+	public List<Object> ticketsSoldPerDayPerEvent(int id){
+		List <Object> ticketsSold = new ArrayList<Object>();
+		List<Ticket []> results = em.createNativeQuery("select sum(t.ticketsBooked),  sum(t.amount*t.ticketsBooked) as totalAmount, t.ticketdate from Ticket t, Person p, Payments pay where p.id=t.userId and t.eventId=:id and t.status = 'confirmed' and pay.amount >= (t.ticketsBooked * t.amount) and pay.trans = t.transactionNumber group by ticketdate").
+				setParameter("id", id).getResultList();
+		Ticket t;
+		for (Object [] ticket : results){
+			t = new Ticket ();
+			t.setTicketdate(ticket[2].toString ());
+			t.setTicketsBooked(Integer.parseInt(ticket[0].toString()));
+			t.setAmountPaid(Integer.parseInt(ticket[1].toString()));
+			ticketsSold.add(t);
+		}
+		return ticketsSold;
+		
 	}
 
 }

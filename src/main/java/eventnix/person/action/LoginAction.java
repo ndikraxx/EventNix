@@ -66,6 +66,7 @@ public class LoginAction extends HttpServlet {
 
 		try{
 			if (login == true) {
+				
 				String uType = personBean.userType(phone, hashedPass).toString();
 				
 				String lastName = personBean.lastName(phone, hashedPass).toString();
@@ -98,7 +99,7 @@ public class LoginAction extends HttpServlet {
 		
 			else if (login == false) {
 
-				out.println("login.jsp");
+				out.println("login1.jsp");
 			}
 		}
 		catch (Exception e){

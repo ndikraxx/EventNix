@@ -36,6 +36,9 @@ public class Ticket {
 	private String transactionNumber;
 	
 	@Column
+	private String ticketdate;
+
+	@Column
 	private String status;
 	
 		@Transient
@@ -61,6 +64,16 @@ public class Ticket {
 	public String getFirstName() {
 	return firstName;
 }
+
+	
+
+public String getTicketdate() {
+		return ticketdate;
+	}
+
+	public void setTicketdate(String ticketdate) {
+		this.ticketdate = ticketdate;
+	}
 
 public void setFirstName(String firstName) {
 	this.firstName = firstName;
@@ -169,5 +182,16 @@ public void setPhone(String phone) {
 		return builder.toString();
 	}
 
+	public String getTicketsSoldPerDayJSN(){
+		StringBuilder builder = new StringBuilder();
+		builder.append("{").
+		
+			append("\"TicketsBooked\": \"").append(getTicketsBooked()).append("\" , ").
+			append("\"amount\": \"").append(getAmountPaid()).append("\" , ").
+			append("\"ticketdate\": \"").append(getTicketdate()).append("\" ").
+			
+			append("}");
+		return builder.toString();
+	}
 
 }

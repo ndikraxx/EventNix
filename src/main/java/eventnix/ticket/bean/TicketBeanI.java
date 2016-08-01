@@ -14,5 +14,9 @@ public interface TicketBeanI {
 	String attendersListJSON(int id);
 
 	void updatePayments();
+	
+	List<Object> ticketsSoldPerDayPerEvent(int id);
+
+	String ticketsPerDay(int id);
 
 }

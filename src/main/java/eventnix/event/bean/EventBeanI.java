@@ -18,4 +18,10 @@ public interface EventBeanI {
 
 	String userPostedEventsJSON(long id);
 
+	String searchByName(String searchParameter);
+
+	String searchByVenue(String searchParameter);
+
+	String searchByDesc(String searchParameter);
+
 }

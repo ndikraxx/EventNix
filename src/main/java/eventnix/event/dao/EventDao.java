@@ -51,4 +51,57 @@ public class EventDao extends GenericDao<Event, Long> implements EventDaoI {
 		return ((Long) result.get(0)).intValue();
 		
 	}
+
+	@Override
+	public List<Event> searchByName(String searchParameter) {
+		List <Event>result = em.createQuery("from Event e where e.name like :search")
+				.setParameter("search", "%" + searchParameter + "%")
+				.getResultList();
+		System.out.println("This is the result "+result);
+		return result;
+		
+	}
+	
+	
+	public int countofSearchByName(String searchParameter){
+	List result =  em.createQuery("select count (*) from Event e where e.name like :search")
+				.setParameter("search", "%" + searchParameter + "%").getResultList();
+	System.out.println(((Long) result.get(0)).intValue());
+	return ((Long) result.get(0)).intValue();
+	}
+	public List searchByVenue(String searchParameter) {
+		
+		List <Event>result = em.createQuery("from Event e where e.venue like :search")
+				.setParameter("search", "%" + searchParameter + "%")
+				.getResultList();
+		System.out.println("This is the result "+result);
+		return result;
+		
+	}
+
+	@Override
+	public int countofSearchByVenue(String searchParameter) {
+		List result =  em.createQuery("select count (*) from Event e where e.venue like :search")
+				.setParameter("search", "%" + searchParameter + "%").getResultList();
+	System.out.println(((Long) result.get(0)).intValue());
+	return ((Long) result.get(0)).intValue();
+	}
+	@Override
+	public List<Event> searchByDesc(String searchParameter) {
+		
+		List <Event>result = em.createQuery("from Event e where e.description like :search")
+				.setParameter("search", "%" + searchParameter + "%")
+				.getResultList();
+		System.out.println("This is the result "+result);
+		return result;
+		
+	}
+
+	@Override
+	public int countofSearchByDesc(String searchParameter) {
+		List result =  em.createQuery("select count (*) from Event e where e.description like :search")
+				.setParameter("search", "%" + searchParameter + "%").getResultList();
+	System.out.println(((Long) result.get(0)).intValue());
+	return ((Long) result.get(0)).intValue();
+	}
 }

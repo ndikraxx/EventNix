@@ -13,6 +13,10 @@
     <link rel="stylesheet" type="text/css" href="css/bootstrap-reset.css">
 	<!-- start:style arjuna -->
 	<link rel="stylesheet" type="text/css" href="css/arjuna.css">
+	
+	<link rel="stylesheet" type="text/css" href="css/alertify.core.css">
+	<link rel="stylesheet" type="text/css" href="css/alertify.default.css">
+	<link rel="stylesheet" type="text/css" href="css/alertify.bootstrap.css">
     <link rel="stylesheet" type="text/css" href="plugins/owl.carousel/owl-carousel/owl.carousel.css">
     <link rel="stylesheet" type="text/css" href="plugins/owl.carousel/owl-carousel/owl.theme.css">
     <link rel="stylesheet" type="text/css" href="plugins/owl.carousel/owl-carousel/owl.transitions.css">
@@ -73,7 +77,7 @@
                             <i class="fa fa-angle-left pull-right"></i>
                         </a>
                         <ul class="treeview-menu">
-								<li><a  onclick="eventaction.show()"><i class="fa fa-circle-o"></i>Event Action<!--Todo List--></a></li>
+								<li><a  onclick="App.Cmp.showOrganizerEventsProgressAdmin()"><i class="fa fa-circle-o"></i>Event Action<!--Todo List--></a></li>
                             <li><a href="#" onclick =""><i class="fa fa-circle-o"></i> View Archieved Events <!-- Draggable Portlet--></a></li>
                            </ul>
                     </li>
@@ -91,8 +95,8 @@
                             <i class="fa fa-angle-left pull-right"></i>
                         </a>
                         <ul class="treeview-menu">
-                            <li><a href="general.html"><i class="fa fa-circle-o"></i> General</a></li>
-                        
+                            <li><a onclick=""><i class="fa fa-circle-o"></i> General</a></li>
+                 
                         </ul>
                     </li>
 
@@ -152,6 +156,7 @@
 		<script src="js/arjuna.js"></script>
 	<!-- end:javascript for all pages-->
 
+ <script src="js/alertify.min.js"></script>
     <!-- start:javascript for this page -->
     <script src="plugins/flot/jquery.flot.min.js"></script>
     <script src="plugins/flot/jquery.flot.tooltip.min.js"></script>
