@@ -19,7 +19,7 @@ import eventnix.person.bean.PersonBeanI;
 import eventnix.person.model.Person;
 
 
-@WebServlet("/login")
+@WebServlet("/login/*")
 public class LoginAction extends HttpServlet {
 	
 	private static final long serialVersionUID = 1L;
@@ -30,7 +30,24 @@ public class LoginAction extends HttpServlet {
 	public void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		
-	
+PrintWriter out = response.getWriter();
+		
+		String comp [] = request.getRequestURI().split("/");
+		
+		String path = comp [comp.length-1];
+		
+		if (path.equalsIgnoreCase("userEvent")){
+			
+			HttpSession session = request.getSession();
+			
+			int id =  Integer.parseInt(session.getAttribute("uid").toString());
+			
+			System.out.println(personBean.attendersListJSON(id));
+			
+			out.println(personBean.attendersListJSON(id));
+		}
+			
+		else{
 			HttpSession session = request.getSession();
 			
 			session.invalidate();
@@ -38,7 +55,7 @@ public class LoginAction extends HttpServlet {
 		    response.sendRedirect("login.jsp");
 		    
 		    return;
-		
+		}
 	}
 
 	public void doPost(HttpServletRequest request, HttpServletResponse response)
@@ -74,6 +91,7 @@ public class LoginAction extends HttpServlet {
 				HttpSession session = request.getSession();
 				
 				session.setAttribute("sessionLname", lastName);
+				session.setAttribute("userType", uType);
 				 session.setMaxInactiveInterval(1800000);
 				
 				String uid = personBean.userId(phone, hashedPass);

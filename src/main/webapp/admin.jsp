@@ -20,6 +20,22 @@
     <link rel="stylesheet" type="text/css" href="plugins/owl.carousel/owl-carousel/owl.carousel.css">
     <link rel="stylesheet" type="text/css" href="plugins/owl.carousel/owl-carousel/owl.theme.css">
     <link rel="stylesheet" type="text/css" href="plugins/owl.carousel/owl-carousel/owl.transitions.css">
+    <link rel="stylesheet"
+	href="http://cdn.oesmith.co.uk/morris-0.4.3.min.css">
+<script src="https://code.jquery.com/jquery-2.2.4.min.js"
+	integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44="
+	crossorigin="anonymous"></script>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
+<script type="text/javascript">
+function hideAttenders(){
+	var mydiv = document.getElementById('showAttenders');
+    mydiv.style.display = 'none'
+}
+
+</script>
+<script
+	src="//cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
+<script src="http://cdn.oesmith.co.uk/morris-0.4.3.min.js"></script>
    
 </head>
 <body class="cl-default fixed">
@@ -71,31 +87,31 @@
                         </a>
                     </li>
                     <li class="treeview">
-                        <a href="#">
+                        <a onclick=" hideAttenders(); hideReport()">
                             <i class="fa fa-spinner"></i>
                             <span>Events Center <!--Components--></span>
                             <i class="fa fa-angle-left pull-right"></i>
                         </a>
                         <ul class="treeview-menu">
 								<li><a  onclick="App.Cmp.showOrganizerEventsProgressAdmin()"><i class="fa fa-circle-o"></i>Event Action<!--Todo List--></a></li>
-                            <li><a href="#" onclick =""><i class="fa fa-circle-o"></i> View Archieved Events <!-- Draggable Portlet--></a></li>
+                       
                            </ul>
                     </li>
                     <li class="treeview">
-                        <a onclick ="">
+                        <a onclick ="App.Cmp.loadOrganizerEventsAdmin(); hideReport()">
                             <i class="fa fa-users"></i>
                             <span>List of Event Attenders <!--Charts--></span>
 
                         </a>
                     </li>
                     <li class="treeview">
-                        <a href="#">
+                        <a onclick="hideAttenders()">
                             <i class="fa fa-credit-card "></i>
                             <span>Payments</span>
                             <i class="fa fa-angle-left pull-right"></i>
                         </a>
                         <ul class="treeview-menu">
-                            <li><a onclick=""><i class="fa fa-circle-o"></i> General</a></li>
+                            <li><a onclick="App.Cmp.viewPaymentProgressAdmin()"><i class="fa fa-circle-o"></i> Graphical Representation </a></li>
                  
                         </ul>
                     </li>
@@ -119,19 +135,35 @@
                     </div> 
                     
                     <!-- start:AJAX Content to change depending on the item clicked -->
-                    <div class="col-lg-12 flot-index" id= "ajax-content">
-                        <div class="row">
-                            <div class="col-sm-6">
-                                <section>
-                                    
-                              
-                                </section>
-                            </div>
-                            <div class="col-sm-6">
-                            
+                    <div class="col-lg-12 flot-index" id= "ajax-content"></div>
+                    <div id="showAttenders"></div>
+                        <div class="row" style="display:none;" id="report" >
+				
+					<div class="col-md-6">
+					<div class="box">
+							<h4>Tickets Sold vs Ticket Remaining</h4>
+							<hr>
+							<div id="ticketsales" class="graph"></div>
+						</div>
+					</div>
+					<div class="col-md-6">
+					<div class="box">
+							<h4>Ticket Sales per day</h4>
+							<hr>
+							<div id="ticketsalesperday" class="graph"></div>
+						</div>
+					</div>
+			 	
+					<div class="col-lg-12 col-md-12">
+					<div class="box">
+							<h4>Ticket Sales per day</h4>
+							<hr>
+							<div id="paymentsperday" class="graph"></div>
+							<div id="totalPayments" class="graph"></div>
+						</div>
+					</div> 
+				</div>
 
-                            </div>
-                        </div>
                     </div>
                     <!-- end:AJAX content-->
 

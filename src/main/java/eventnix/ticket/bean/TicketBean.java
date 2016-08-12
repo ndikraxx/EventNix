@@ -46,14 +46,25 @@ public class TicketBean implements TicketBeanI {
 	
 
 	public String attendersListJSON (int id){
+		int count1 = ticketDao.countAttendersList(id);
+		if (count1==0){
+			System.out.println("the number of attenders is  "+count1);
+			return null;
+		}
+		else{
 		List<Object> tickets = ticketDao.attendersList(id);
 		
 		System.out.println(tickets);
 		StringBuilder sb = new StringBuilder();
+		int count = ticketDao.countAttendersList(id);
+		
+			System.out.println("the number of attenders is  "+count);
+		/*	return null;
+		}*/
+		/*else{*/
 		sb.append("[");
 		
-		int count = ticketDao.countAttendersList(id);
-
+		
 		for(Object ticket : tickets){
 			sb.append(((Ticket) ticket).getattendersListJson());
 			
@@ -66,10 +77,10 @@ public class TicketBean implements TicketBeanI {
 		
 		
 		sb.append("]");
-	System.out.println("my JSON "+sb.toString());
+	
 		return sb.toString();
 		
-	
+		}
 	}
 	
 	public void updatePayments(){

@@ -210,5 +210,13 @@ public class Event {
 				.append("}");
 		return builder.toString();
 	}
+	public String listofEvents(){
+		StringBuilder builder = new StringBuilder();
+		builder.append("{").append("\"eventName\": \"").append(getName()).append("\"  ").
+		append("}");
+			
+		return builder.toString();
+		
+	}
 
 }

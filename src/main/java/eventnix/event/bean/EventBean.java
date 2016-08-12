@@ -182,6 +182,32 @@ public class EventBean implements EventBeanI{
 		
 
 	}
+	@Override
+	public String allPostedEvents (){
+		//Map<String, Object> filter = new HashMap<String, Object>();
+		List<Event> events = eventDao.getPostedEventAdmin();
+		
+		System.out.println(events);
+		StringBuilder sb = new StringBuilder();
+		sb.append("[");
+		
+		int count = eventDao.countofAllPostedEventsAdmin();
+	
+		for(Event event :  events){
+			sb.append(event.getEvent());
+			
+			count--;
+			
+			if(count >= 1)
+				sb.append(",");
+		}
+		
+		sb.append("]");
+	
+		return sb.toString();
+		
+	
+	}
 
 	
 

@@ -11,11 +11,14 @@
  <script src="//cdn.tinymce.com/4/tinymce.min.js"></script>
   <script>tinymce.init({ selector:'textarea' });</script>
 <script type="text/javascript" src= "https://cdn.jsdelivr.net/momentjs/2.14.1/moment.min.js"></script>
-	  
+	  	<link rel="stylesheet" type="text/css" href="css/alertify.core.css">
+	<link rel="stylesheet" type="text/css" href="css/alertify.default.css">
+	<link rel="stylesheet" type="text/css" href="css/alertify.bootstrap.css">
 <link href="js/EventNix/boot/datetimepicker.min.css" rel="stylesheet">
 <script src="js/EventNix/boot/jquery-2.1.4.js"></script>
      <script src="js/EventNix/boot/datetimepicker.min.js"></script>
       <script src="js/alertify.min.js"></script>
+   
 
 <meta charset="UTF-8">
 	<meta content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no' name='viewport'>
@@ -69,56 +72,49 @@
 	</header>
     <!-- end:navbar top -->
 
-    <!-- start:wrapper body -->
-    <div class="wrapper row-offcanvas row-offcanvas-left">
-        <!-- start:left sidebar -->
-        <aside class="left-side sidebar-offcanvas">
-            <section class="sidebar">
-                <!-- sidebar menu: : style can be found in sidebar.less -->
-                <ul class="sidebar-menu">
-                    <li class="active">
-                        <a href="organizer.jsp">
-                            <i class="fa fa-dashboard"></i> <span>Dashboard</span>
-                        </a>
-                    </li>
-                    <li class="treeview">
-                        <a href="#">
-                            <i class="fa fa-spinner"></i>
-                            <span>Events Center <!--Components--></span>
-                            <i class="fa fa-angle-left pull-right"></i>
-                        </a>
-                        <ul class="treeview-menu">
-								<li><a  href="eventform.jsp"><i class="fa fa-circle-o"></i>Create a new Event<!--Todo List--></a></li>
-                            <li><a href="#" onclick ="eventform.show()"><i class="fa fa-circle-o"></i> View Posted Event Details <!-- Draggable Portlet--></a></li>
-                           </ul>
-                    </li>
-                    <li class="treeview">
-                        <a onclick ="">
-                            <i class="fa fa-users"></i>
-                            <span>List of Event Attenders <!--Charts--></span>
-								<i class="fa fa-angle-left pull-right"></i>
-                        </a>
-                        <ul class="treeview-menu">
-								<li><a  onclick="App.Cmp.loadOrganizerEvents()"><i class="fa fa-circle-o"></i>View According to posted Events<!--Todo List--></a></li>
-                            
-                           </ul>
-                        </a>
-                    </li>
-                    <li class="treeview">
-                        <a href="#">
-                            <i class="fa fa-credit-card "></i>
-                            <span>Payments</span>
-                            <i class="fa fa-angle-left pull-right"></i>
-                        </a>
-                        <ul class="treeview-menu">
-                            <li><a href="general.html"><i class="fa fa-circle-o"></i> General</a></li>
-                        
-                        </ul>
-                    </li>
+  <div class="wrapper row-offcanvas row-offcanvas-left">
+		<!-- start:left sidebar -->
+		<aside class="left-side sidebar-offcanvas">
+			<section class="sidebar">
+				<!-- sidebar menu: : style can be found in sidebar.less -->
+				<ul class="sidebar-menu">
+					<li class="active"><a href="organizer.jsp"> <i
+							class="fa fa-dashboard"></i> <span>Dashboard</span>
+					</a></li>
+					<li class="treeview"><a onclick=" hideAttenders(); hideReport()"> <i class="fa fa-spinner"></i>
+							<span>Events Center <!--Components--></span> <i
+							class="fa fa-angle-left pull-right"></i>
+					</a>
+						<ul class="treeview-menu">
+							<li><a href="eventform.jsp"><i class="fa fa-circle-o"></i>Create
+									a new Event<!--Todo List--></a></li>
+							<li><a 
+								onclick="App.Cmp.showOrganizerEventsProgress()"><i
+									class="fa fa-circle-o"></i> View Posted Event Details <!-- Draggable Portlet--></a></li>
+							<li><a href="index.jsp"><i
+									class="fa fa-circle-o"></i> Book an Event<!-- Draggable Portlet--></a></li>
+						</ul></li>
+					<li class="treeview"><a onclick="hideReport()"> <i class="fa fa-users"></i>
+							<span>List of Event Attenders <!--Charts--></span> <i
+							class="fa fa-angle-left pull-right"></i>
+					</a>
+						<ul class="treeview-menu">
+							<li><a onclick="App.Cmp.loadOrganizerEvents()"><i
+									class="fa fa-circle-o"></i>View According to posted Events<!--Todo List--></a></li>
 
-                </ul>
-            </section>
-        </aside>
+						</ul> </a></li>
+					<li class="treeview"><a onclick ="hideAttenders()"> <i
+							class="fa fa-credit-card "></i> <span>Payments</span> <i
+							class="fa fa-angle-left pull-right"></i>
+					</a>
+						<ul class="treeview-menu">
+							<li><a onclick="App.Cmp.viewPaymentProgress()"><i
+									class="fa fa-circle-o"></i> Graphical Representation of Ticket Sales</a></li>
+						</ul></li>
+
+				</ul>
+			</section>
+		</aside>
         <!-- end:left sidebar -->
 
         <!-- start:right sidebar -->
@@ -137,7 +133,7 @@
                     <!-- start:AJAX Content to change depending on the item clicked -->
                     <div class="col-lg-12 flot-index" id= "ajax-content">
                         <div class="row">
-      <form role="form" method="post" action= "./fileUpload" enctype="multipart/form-data" >
+      <form role="form" method="post" action= "./fileUpload" enctype="multipart/form-data" id="form" >
       		<div class="form group">
       		<div class="input-group"><span class="input-group-addon"><i class="fa fa-certificate"></i></span>
       			<input type="text" class="form-control" name="name"   placeholder="Enter Event Name" required>
@@ -179,9 +175,8 @@
         
         <script type="text/javascript">
         function beforeSubmit(){
-        alertify.error("Your event has successfully been created and is pending approval");
+        	alertify.alert("You have successfully created the event :-)");
         }
-        
         $(function () {
             $('#datetimepicker2').datetimepicker();
             $('#datetimepicker3').datetimepicker({
@@ -226,7 +221,7 @@
       			</div>
       	<br>
       		
-      		<button type = "submit" class="btn btn-lg btn-info text-center"  id="submita" name="submit" onclick = "beforeSubmit()">Create the Event</button>
+      		<button class="btn btn-lg btn-info text-center"  id="submita" name="submit" onclick = "beforeSubmit()">Create the Event</button>
       			      	</form>  
       		</div>
       		</div>
@@ -234,5 +229,7 @@
       			      	
       			      	
 </body>
+		<script src="js/EventNix/base.app.js"></script>
+		<script src="js/EventNix/eventform.js"></script>
 
 		<!-- start:arjuna.js --></html>

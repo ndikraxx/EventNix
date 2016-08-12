@@ -16,4 +16,8 @@ public interface PersonDaoI extends GenericDaoI<Person, Long>{
 
 	String userId(String phone, String password);
 
+	List<Object> userBookedTickets(int id);
+
+	int countUserEvents(int id);
+
 }

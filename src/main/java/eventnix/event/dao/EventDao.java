@@ -44,6 +44,17 @@ public class EventDao extends GenericDao<Event, Long> implements EventDaoI {
 		
 	}
 	
+	public List<Event> getPostedEventAdmin () {
+		return em.createQuery(" from Event e where e.status='Approved'").getResultList();
+		
+	}
+	@Override
+	public int countofAllPostedEventsAdmin(){
+		
+		List result = em.createQuery("select count(e.name) from Event e where e.status='Approved' ").getResultList();
+		return ((Long) result.get(0)).intValue();
+	}
+	
 	public int countAllUserPostedEvents (long id){
 		List result =  em.createQuery("select count(id) from Event where userId=:id").setParameter("id", id).getResultList();
 	

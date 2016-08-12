@@ -177,6 +177,41 @@ App.Cmp = {
 				var json = JSON.parse(resp)
 				var div = '';
 				json.forEach(function (el){
+					if (el.status == "Approved"){
+					var buttonId = "eventId-"+el.id;
+					div+= '<button type="button" class="btn btn-primary" id ='+buttonId+'>'+el.name+'</button> &nbsp&nbsp'
+					}
+					});
+				div+='</div>';
+				
+				context.getEl('ajax-content').innerHTML = div;
+				if (context.getEl('ajax-content').innerHTML = div){
+					var json = JSON.parse(resp)
+					json.forEach(function (el){
+						if (el.status =="Approved"){
+							var buttonId = "eventId-"+el.id;
+							 context.getEl(buttonId).addEventListener("click", function (){
+								 context.viewAttendersList(el.id);
+							 });
+						}
+						
+						
+				 });
+				}
+			}
+			});
+			
+		},
+		loadOrganizerEventsAdmin: function (){
+			var context = this;
+			context.ajaxRequest.call({
+				httpMethod: context.httpMethod,
+				httpUrl: './addEvent/viewEventsAdmin',
+				responseTarget: 'ajax-content',
+				updateTarget: function (resp){
+				var json = JSON.parse(resp)
+				var div = '';
+				json.forEach(function (el){
 					var buttonId = "eventId-"+el.id;
 					div+= '<button type="button" class="btn btn-primary" id ='+buttonId+'>'+el.name+'</button> &nbsp&nbsp'
 				});
@@ -185,7 +220,7 @@ App.Cmp = {
 				if (context.getEl('ajax-content').innerHTML = div){
 					var json = JSON.parse(resp)
 					json.forEach(function (el){
-						console.log("This is the repsonse due" +el.status)
+						
 						var buttonId = "eventId-"+el.id;
 					 context.getEl(buttonId).addEventListener("click", function (){
 						 context.viewAttendersList(el.id);
@@ -225,6 +260,43 @@ App.Cmp = {
 			context.ajaxRequest.call({
 				httpMethod: context.httpMethod,
 				httpUrl: './addEvent/loadOrganizerEvent',
+				responseTarget: 'ajax-content',
+				updateTarget: function (resp){
+				var json = JSON.parse(resp)
+				var div = '';
+				json.forEach(function (el){
+					if (el.status == "Approved"){
+					var buttonId = "eventId-"+el.id;
+					div+= '<button type="button" class="btn btn-primary" id ='+buttonId+'>'+el.name+'</button> &nbsp&nbsp'
+					}
+				});
+				div+='</div>';
+				context.getEl('ajax-content').innerHTML = div;
+				if (context.getEl('ajax-content').innerHTML = div){
+					var json = JSON.parse(resp)
+					json.forEach(function (el){
+						if(el.status == "Approved"){
+						var buttonId = "eventId-"+el.id;
+					 context.getEl(buttonId).addEventListener("click", function (){
+						
+					context.showTicketsSold(el.id);
+					 context.showPaymentReport(el.id);
+					 context.SalesReport(el.id)
+					 
+					 });
+						}
+				 });
+				}
+			}
+			});
+			
+			
+		},
+		viewPaymentProgressAdmin: function (){
+			var context = this;
+			context.ajaxRequest.call({
+				httpMethod: context.httpMethod,
+				httpUrl: './addEvent/viewEventsAdmin',
 				responseTarget: 'ajax-content',
 				updateTarget: function (resp){
 				var json = JSON.parse(resp)
@@ -309,7 +381,7 @@ App.Cmp = {
 				httpUrl: './addEvent',
 				responseTarget: 'ajax-content',
 				updateTarget: function (resp){
-			
+		
 					var table = '<table class= "table table-bordered table-striped table-condensed">'
 						table += "<tr>"
 							table +='<th>Event Name</th>'
@@ -358,7 +430,7 @@ App.Cmp = {
 						var approve = "approve-"+el.id; 
 						var disapprove ="disapprove-"+el.id;
 					context.getEl(approve).addEventListener('click', function() {
-						alertify.confirm("Message", function (e) {
+						alertify.confirm("Do you want to proceed", function (e) {
 						    if (e) {
 						    	context.approve(el.id);
 								alertify.error("You have approved the event successfully")
@@ -372,7 +444,7 @@ App.Cmp = {
 					});
 					
 					context.getEl(disapprove).addEventListener('click', function() {
-						alertify.confirm("Message", function (e) {
+						alertify.confirm("Do you want to proceed", function (e) {
 						    if (e) {
 						context.disapprove(el.id);
 						alertify.error("You have Disapproved the event successfully")
@@ -397,6 +469,15 @@ App.Cmp = {
 				httpUrl: './ticket/viewAttendersList?eventid='+id,
 				responseTarget: 'nested-attenders-list',
 				updateTarget: function (resp){
+					console.log(resp)
+					var json = JSON.parse(resp)
+					var obj = Object.keys(json)
+					if(!obj.includes("0")){
+						document.getElementById('showAttenders').style.display = 'block';
+						document.getElementById("showAttenders").innerHTML ="<br><br><br><br><br><br><h2>No Tickets have been sold</h2><br><br><br><br><br><br>";
+						
+					}
+					else {
 					var table = '<table class= "table table-bordered table-striped table-condensed">'
 						table += "<tr>"
 							table +='<th>Firstname</th>'
@@ -422,8 +503,10 @@ App.Cmp = {
 						
 					});
 					table+="</table>";
-					context.getEl('ajax-content').innerHTML = table;
 					
+					document.getElementById('showAttenders').style.display = 'block';
+					context.getEl('showAttenders').innerHTML = table;
+					}
 					
 				}
 			});
@@ -586,9 +669,9 @@ App.Cmp = {
 		        ' <a class="btn btn-primary" id = "book-ticket">Book Ticket</a>'+
 		        '<hr/><br><div>';
 					div += '</div></div>';
-						context.getEl(context.responseTarget).innerHTML = div;
+						context.getEl("show-events").innerHTML = div;
 
-						if (context.getEl(context.responseTarget).innerHTML = div) {
+						if (context.getEl("show-events").innerHTML = div) {
 							var price, tickets;
 							context.getEl("unit").addEventListener("change", function() {
 								price = obj.price;
@@ -638,7 +721,7 @@ App.Cmp = {
 					'</ol>'+
 					'<div class="left-align sm-width" id = "payment-form">';
 					
-					context.getEl(context.responseTarget).innerHTML = div;
+					context.getEl("show-events").innerHTML = div;
 
 					
 				
@@ -647,6 +730,42 @@ App.Cmp = {
 			
 		},
 		 
+		userEvents:function(){
+			var me = this;
+			me.ajaxRequest.call({
+				httpMethod :'GET',
+				httpUrl : './login/userEvent',
+				responseTarget : me.responseTarget,
+				updateTarget : function(resp) {
+					var json = JSON.parse(resp);
+					var object =Object(json);
+					var div = '<div class="container">'+
+  '<div class="well"><h2>Upcoming Events: Confirmed</h2></div>'+
+ '<table class="table table-condensed table-bordered table-hover">'+
+    '<tr>'+
+     ' <th>EVENT NAME</th>'+
+      '<th>CATEGORY</th>'+
+      '<th>TICKETS BOOKED</th>'+
+      '<th>AMOUNT PAID</th>'+
+      '</tr>';
+					json.forEach(function (el){
+						div+='<tr>'
+						div+='<td>'+el.EventName+'</td>'
+						div+='<td>'+el.Category+'</td>'
+						div+='<td>'+el.Tickets+'</td>'
+						div+='<td>'+el.Amount+'</td>'
+						div+='</tr>'
+					});
+					div+='</table>';
+					
+					
+					me.getEl('show-events').innerHTML = div;
+					
+					
+				}
+			});
+		},
+		
 		showEvent: function (){
 			var me = this;
 			//var buttonId = el.id;
@@ -663,15 +782,20 @@ App.Cmp = {
 						var buttonId = "event-"+el.id;
 						
 						if (el.status == 'Approved'){
-							div += ' <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 box-shadow">';
+							div += ' <div class="col-sm-6 col-md-4 col-lg-4">';
 							div +=  '<div class="thumbnail">';
-							
-							div+= '<img  height= "250px" width = "300px" src="myimages/'+el.imageName+'"/>';	
-			                 div+='<div class="caption">';
-						div += '<h4>'+el.name+'</h4>';
-						div += '<p>'+el.venue+'</p>';
-						div += '<p>'+el.price+'</p>';
-						div += ' <a class="btn btn-primary" id = "'+buttonId+'">See More</a>';
+							div += '<div class="overlay-container">';
+							div+= '<img  height= "250px" width = "350px" src="myimages/'+el.imageName+'"/>';	
+			                div+= '	<div class="overlay-content">';
+			                div+='<h3 class="h4 headline">Description</h3>';
+			                div+='<p>'+el.description+'</p>';
+			                div+='</div></div>';
+							div+='<div class="caption">';
+						div += '<div class="thumbnail-meta">';
+							div+='<p><b>Event Name </b>: ' +el.name+'</p><hr></div>';
+						div += '<div class="thumbnail-meta"><p><b>Venue </b>: '+el.venue+'</p><hr></div>';
+						div += '<div class="thumbnail-meta"><span class = "h3">KSH.  <b><i>'+el.price+' /-</i></b></span><hr>';
+						div += ' <a class=""btn btn-link pull-right" id = "'+buttonId+'">See More <i class="fa fa-arrow-right"></i></a></div>';
 						div+='</div></div></div>'
 							
 						
@@ -711,20 +835,28 @@ App.Cmp = {
 					var buttonId = "event-"+el.id;
 					
 					if (el.status == 'Approved'  && el.category == me.page){
-						div += ' <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 box-shadow">';
-						div +=  '<div class="thumbnail">';
-						div+= '<img  height= "350px" width = "350px" src="myimages/'+el.imageName+'"/>';	
-		                 div+='<div class="caption">';
-					div += '<h4>'+el.name+'</h4>';
-					div += '<p>'+el.venue+'</p>';
-					div += '<p>'+el.price+'</p>';
-					div += ' <a class="btn btn-sm btn-primary" id = "'+buttonId+'" >See More</a>';
 					
-					div+='</div></div></div>'
-					}
-					
-				div += '</div></div>';
-					
+							div += ' <div class="col-sm-6 col-md-4 col-lg-4">';
+							div +=  '<div class="thumbnail">';
+							div += '<div class="overlay-container">';
+							div+= '<img  height= "250px" width = "350px" src="myimages/'+el.imageName+'"/>';	
+			                div+= '	<div class="overlay-content">';
+			                div+='<h3 class="h4 headline">Description</h3>';
+			                div+='<p>'+el.description+'</p>';
+			                div+='</div></div>';
+							div+='<div class="caption">';
+						div += '<div class="thumbnail-meta">';
+							div+='<p><b>Event Name </b>: ' +el.name+'</p><hr></div>';
+						div += '<div class="thumbnail-meta"><p><b>Venue </b>: '+el.venue+'</p><hr></div>';
+						div += '<div class="thumbnail-meta"><span class = "h3">KSH.  <b><i>'+el.price+' /-</i></b></span><hr>';
+						div += ' <a class=""btn btn-link pull-right" id = "'+buttonId+'">See More <i class="fa fa-arrow-right"></i></a></div>';
+						div+='</div></div></div>'
+							
+						
+
+						}
+						
+						div += '</div></div>';
 			
 			});
 				me.getEl(me.responseTarget).innerHTML = div;
@@ -778,7 +910,7 @@ App.Cmp = {
 					updateTarget: function (resp){
 						var mydiv = document.getElementById('report');
 						 
-					    mydiv.style.display = 'block'
+					    mydiv.style.display = 'block';
 				
 				
 			showTicketsperDay(resp)
@@ -802,6 +934,7 @@ App.Cmp = {
 					    mydiv.style.display = 'block'
 				
 				Script(resp);
+					
 						
 				}
 				});
@@ -821,9 +954,9 @@ App.Cmp = {
 
 						var mydiv = document.getElementById('report');
 						 
-						    mydiv.style.display = 'block'
+						    mydiv.style.display = 'block';
 				
-				
+						  
 						showSalesperDay(resp)
 						
 				}
@@ -845,15 +978,26 @@ Morris.Donut({
     element: 'ticketsales',
      data:[{label: "Remaining tickets", value: ticketRemaining}, {label: "Sold Tickets"  , value: tickestSold}],
        colors: ['#41cac0', ' #ff3333', '#34a39b'],
-     formatter: function (y) { return y }
+    formatter: function (y) { return y }
    });
 	
 }
 	
 	function showTicketsperDay (resp) {
+		var total =0;
 		var json = JSON.parse(resp)
-	
-		Morris.Bar({
+		json.forEach(function (el){
+			 total+=el.TicketsBooked;
+			 console.log ("THe total is "+total+"\n")
+		});
+	document.getElementById("ticketsalesperday").innerHTML ="";
+		var obj = Object.keys(json)
+		if(!obj.includes("0")){
+			document.getElementById("ticketsalesperday").innerHTML ="<br><br><br><br><br><br><h2>No Tickets have been sold</h2><br><br><br><br><br><br><br><br><br>";
+		}
+		else{
+		var bar = Morris.Bar({
+			
 	        element: 'ticketsalesperday',
 	        data: json,
 	        xkey: 'ticketdate',
@@ -862,16 +1006,35 @@ Morris.Donut({
 	        barRatio: 0.4,
 	        xLabelAngle: 35,
 	        hideHover: 'auto',
-	        barColors: ['#6883a3']
+	        barColors: ['#6883a3'],
+	        resize: true
 	      });
-
+		
+		
+		}
 	}
 	
 
 	
 	function showSalesperDay (resp) {
+		
 		var json = JSON.parse(resp)
-	
+		var obj = Object.keys(json)
+		if(!obj.includes("0")){
+			document.getElementById("paymentsperday").innerHTML ="<br><br><br><br><br><br><h2>No Tickets have been sold</h2><br><br><br><br><br><br>";
+			document.getElementById("totalPayments").innerHTML ="";
+		}
+		else{
+			var total=0;
+			var json = JSON.parse(resp)
+			json.forEach(function (el){
+				var number = parseInt(el.amount)
+				 total+= number;
+				
+				document.getElementById("totalPayments").innerHTML = "<h2>The total Amount accrued is "+total+"<h2>";
+			});
+			
+	document.getElementById("paymentsperday").innerHTML ="";
 		Morris.Bar({
 	        element: 'paymentsperday',
 	        data: json,
@@ -881,9 +1044,12 @@ Morris.Donut({
 	        barRatio: 0.4,
 	        xLabelAngle: 35,
 	        hideHover: 'auto',
-	        barColors: [' #ff3333']
+	        barColors: [' #ff3333'],
+	        resize: true
 	      });
-
+		
+		
+		}
 	}
 
 
@@ -901,33 +1067,51 @@ function search(){
 		httpUrl : './search',
 		requestParams : params,
 		updateTarget: function (resp){
+			var div= '<div class=" well text-center">'+
+	    	'<h2>SHOWING SEARCH RESULTS</h2>'+
+	          '</div>'+
+	          '<div class= "container">';
 			var response = JSON.parse(resp);
 		response.forEach(function (el){
-			var div= '<div class=" well text-center">'+
-    	'<h2>SHOWING SEARCH RESULTS</h2>'+
-          '</div>'+
-          '<div class= "container">'+
-        ' <div class="media">'+
+		
+        div+=' <div class="media">'+
               '   <div class="media-left media-top ">'+
-                           '<img  class="media-object "  height= "70px" width = "70px" src="myimages/'+el.imageName+'"/>'+
+                           '<img  class="media-object "  height= "170px" width = "300px" src="myimages/'+el.imageName+'"/>'+
                          ' </div>'+
           			'<div class="media-body">'+
           					' <h4>'+el.name+'</h4>'+
-          					'<p> VENUE: '+el.venue+'></p>'+
+          					'<p> VENUE: '+el.venue+'</p>'+
           					'<p>PRICE: KSH '+el.price+'</p>'+
           					'<p>START DATE:  '+el.startDate+'</p>'+
           					'<p>END DATE:  '+el.endDate+'</p>'+
-          						'<a class="btn btn-sm btn-primary" onclick='+App.Cmp.seeMore(el.id)+'>See More</a>'+
-          				
+          						'<a class="btn btn-sm btn-primary" id ='+el.id+'>See More</a>'+
+          			
                                   '</div>'+
                          ' </div>'+
                        '<hr>	'+
          ' </div>';
+			
 			document.getElementById('show-events').innerHTML =div;
+			
+
+				
     	
 			
 		})
-									
+		if (document.getElementById('show-events').innerHTML =div){
+			var jsonRecords = JSON.parse(resp);
+		
+			jsonRecords.forEach(function(el) {
+			
+				var buttonId = el.id;
+				document.getElementById(buttonId).addEventListener('click', function() {
+					console.log(buttonId)
+					App.Cmp.seeMore(el.id);
+
+				});
+			
+			});
+		}					
 		}
  })
  	
@@ -940,3 +1124,8 @@ function search(){
 	var mydiv = document.getElementById('report');
 	    mydiv.style.display = 'none'
 })();
+
+function hideReport(){
+	var mydiv = document.getElementById('report');
+    mydiv.style.display = 'none'
+}

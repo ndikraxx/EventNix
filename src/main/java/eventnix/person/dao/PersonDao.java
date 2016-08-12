@@ -1,5 +1,6 @@
 package eventnix.person.dao;
 
+import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -76,10 +77,34 @@ public class PersonDao extends GenericDao<Person, Long> implements PersonDaoI {
 		 }
 		 return userId;
 	}
-	
-	
+
+	public List<Object> userBookedTickets (int id){
+		List <Object> userTickets = new ArrayList<Object>();
+		List <Object []> results = em.createNativeQuery("select e.name,  e.category, t.ticketsBooked, t.amount from Ticket t, Event e, Person p"  
++"  where p.id = t.userId and e.id = t.eventId and t.status = 'confirmed' and p.id =:id").setParameter("id", id).getResultList();
+		Person person;
+		for (Object  [] result : results){
+			person = new Person ();
+			person.setEventName((String) result[0]);
+			person.setCategory((String) result[1]);
+			person.setTicketsBooked((Integer) result[2]);
+			person.setAmount((Integer) result[3]);
+			userTickets.add(person);
+			
+		}
+		return userTickets;
+	}
 	
 
+	public int countUserEvents(int id){
+		 
+		List <BigInteger> result = em.createNativeQuery("select count(e.name) from Ticket t, Event e, Person p"  
++"  where p.id = t.userId and e.id = t.eventId and t.status = 'confirmed' and p.id =:id").setParameter("id", id).getResultList();
+		
+		return (result.get(0).intValue());
+		
+		
+	}
 	
 
 

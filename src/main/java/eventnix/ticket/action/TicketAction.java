@@ -32,9 +32,11 @@ public class TicketAction extends HttpServlet {
 			int eventId =  Integer.parseInt(req.getParameter("eventid"));
 			
 			
-			
+			if (ticketBean.attendersListJSON(eventId) != null)
 			out.println(ticketBean.attendersListJSON(eventId));
+			else
 			
+				out.println("[]");
 		}
 		else if(path.equalsIgnoreCase("ticketsperday")){
 			

@@ -51,6 +51,10 @@ public class AddEvent extends HttpServlet {
 			PrintWriter out = resp.getWriter();
 	        out.println(eventBean.userPostedEventsJSON(id));
 		}
+		else if (path.equalsIgnoreCase("viewEventsAdmin")){
+			PrintWriter out = resp.getWriter();
+	        out.println(eventBean.allPostedEvents());
+		}
 		
 		else {
 			this.list(resp);

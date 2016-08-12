@@ -24,4 +24,6 @@ public interface EventBeanI {
 
 	String searchByDesc(String searchParameter);
 
+	String allPostedEvents();
+
 }

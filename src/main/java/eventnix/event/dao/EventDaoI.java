@@ -29,6 +29,10 @@ public interface EventDaoI extends GenericDaoI<Event, Long> {
 	List<Event> searchByDesc(String searchParameter);
 
 	int countofSearchByDesc(String searchParameter);
+
+	List<Event> getPostedEventAdmin();
+
+	int countofAllPostedEventsAdmin();
 	
 	
 }

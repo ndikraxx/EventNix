@@ -7,6 +7,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Transient;
 
 import eventnix.common.model.Address;
 import eventnix.common.model.Login;
@@ -41,6 +42,20 @@ public class Person {
 	@Column(name = "user_type")
 	private String userType;
 	
+	@Transient
+	private String eventName;
+	
+	@Transient
+	private String startDateTime;
+	
+	@Transient
+	private String category;
+	
+	@Transient
+	private int ticketsBooked;
+	
+	@Transient
+	private int amount;
 	
 	public String getPhoneNumber() {
 		return phoneNumber;
@@ -107,4 +122,58 @@ public class Person {
 		this.identification = identification;
 	}
 
+	public String getEventName() {
+		return eventName;
+	}
+
+	public void setEventName(String eventName) {
+		this.eventName = eventName;
+	}
+
+	public String getStartDateTime() {
+		return startDateTime;
+	}
+
+	public void setStartDateTime(String startDateTime) {
+		this.startDateTime = startDateTime;
+	}
+
+	public String getCategory() {
+		return category;
+	}
+
+	public void setCategory(String category) {
+		this.category = category;
+	}
+
+	public int getTicketsBooked() {
+		return ticketsBooked;
+	}
+
+	public void setTicketsBooked(int result) {
+		this.ticketsBooked = result;
+	}
+
+	public int getAmount() {
+		return amount;
+	}
+
+	public void setAmount(int amount) {
+		this.amount = amount;
+	}
+
+	public String getUserEventsJson(){
+		StringBuilder builder = new StringBuilder();
+		builder.append("{").
+		
+			append("\"EventName\": \"").append(getEventName()).append("\" , ").
+			append("\"Category\": \"").append(getCategory()).append("\" , ").
+			append("\"Tickets\": \"").append(getTicketsBooked()).append("\" , ").
+			append("\"Amount\": \"").append(getAmount()).append("\" ").
+			append("}");
+		return builder.toString();
+	}
+
+	
+	
 }

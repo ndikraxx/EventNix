@@ -13,4 +13,6 @@ public interface PersonBeanI{
 	String lastName(String phone, String password);
 
 	String userId(String phone, String password);
+
+	String attendersListJSON(int id);
 }

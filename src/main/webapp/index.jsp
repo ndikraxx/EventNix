@@ -17,7 +17,7 @@
 <link type="text/css" href="css/custom.css"/>
     <link href="css/mystyle.css" rel="stylesheet">
     <link rel="stylesheet" href="css/colors/default.css" id="option_color">
-
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css">
   </head>
 
   <body>
@@ -47,7 +47,8 @@
 						<div class="btn-group">
 						 <%
 								if (request.getSession().getAttribute("sessionLname") != null) {
-									out.println("<a class='btn btn-warning btn-md'>"+"Welcome, "+request.getSession().getAttribute("sessionLname").toString().toUpperCase()+" </a>");}
+									out.println("<a class='btn btn-large btn-default dropdown-toggle' data-toggle='dropdown'>"+"Welcome, "+request.getSession().getAttribute("sessionLname").toString().toUpperCase()+" <span class='caret'></span></a>"+
+									"<ul class='dropdown-menu'><li><a onclick='App.Cmp.userEvents()'>My Events</a></li></ul>");}
 							
 								else {
 									out.println("<a href='./login' name='logout' class='btn btn-primary btn-md'>Sign in</a>");
@@ -91,9 +92,30 @@
 
 				<div class="jumbotron">
 			<div class="container text-center">
-				<h1>Search for an event on our site </h1>
+			
+		 <%
+			if (request.getSession().getAttribute("sessionLname") != null && request.getSession().getAttribute("userType").equals("Organizer")) {
+					out.println("<h1>Welcome, "+request.getSession().getAttribute("sessionLname").toString().toUpperCase()+" </h1>");
 
-				<form class= "form-inline text-center"  method="post" >
+					out.println("<a href='organizer.jsp' class='btn btn-primary btn-md'>Go to the Event Organizer Site</a>");
+					
+								}
+								
+			else if (request.getSession().getAttribute("sessionLname") != null && request.getSession().getAttribute("userType").equals("Admin")) {
+				out.println("<h1>Welcome, "+request.getSession().getAttribute("sessionLname").toString().toUpperCase()+" </h1>");
+		
+				out.println("<a href='admin.jsp' class='btn btn-primary btn-md'>Go to the Admin Panel</a>");
+				
+			}
+		 out.println("<h2>OR</h2>");
+											%>
+
+				<h1>Search for an event on our site </h1>
+<div class="container text-center">
+<div class ="row>">
+<div class="col-xs-4 col-lg-4 col-md-4 col-sm-4 pull-center"></div>
+<div class="col-xs-4 col-lg-4 col-md-4 col-sm-4">
+				<form class= "text-center form-inline"  method="post" >
 				<input type="text" class="form-control" name="parameter" id="parameter"  placeholder="Enter Search Parameter" required>
 				 <select class="unit" name="searchvalue" id ="searchvalue">
 		                
@@ -103,20 +125,30 @@
 		            
 		           
 		            </select>
-		             
+		            
 				</form>
 				
-<button onclick="search()" class="btn btn-lg btn-info text-center"  id="submita" name="submit"  >Submit</button>  
+				</div>
+				<div class="col-xs-4 col-lg-4 col-md-4 col-sm-4">
+				  <button onclick="search()" class="btn btn-lg btn-info text-center"  id="submita" name="submit">Submit</button> 
+</div>
+<div class="col-xs-4 col-lg-4 col-md-4 col-sm-4"></div>
 
 			</div>
 		</div>
 		
             
-            
+            </div>
 
           </div>
+          </section>
+          
+   <section class="wrapper-md bg-highlight"> 
+          
           <div class ="container">
-          <div class= "row text-center" id = "show-events" ></div>
+          <br>
+          <br>
+          <div class= "row" id = "show-events" ></div>
         </div>
         
       </section>

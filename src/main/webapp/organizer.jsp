@@ -30,6 +30,13 @@
 <script
 	src="//cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
 <script src="http://cdn.oesmith.co.uk/morris-0.4.3.min.js"></script>
+<script type="text/javascript">
+function hideAttenders(){
+	var mydiv = document.getElementById('showAttenders');
+    mydiv.style.display = 'none'
+}
+
+</script>
 
 </head>
 <body class="cl-default fixed">
@@ -78,18 +85,20 @@
 					<li class="active"><a href="organizer.jsp"> <i
 							class="fa fa-dashboard"></i> <span>Dashboard</span>
 					</a></li>
-					<li class="treeview"><a href="#"> <i class="fa fa-spinner"></i>
+					<li class="treeview"><a onclick=" hideAttenders(); hideReport()"> <i class="fa fa-spinner"></i>
 							<span>Events Center <!--Components--></span> <i
 							class="fa fa-angle-left pull-right"></i>
 					</a>
 						<ul class="treeview-menu">
 							<li><a href="eventform.jsp"><i class="fa fa-circle-o"></i>Create
 									a new Event<!--Todo List--></a></li>
-							<li><a href="#"
+							<li><a 
 								onclick="App.Cmp.showOrganizerEventsProgress()"><i
 									class="fa fa-circle-o"></i> View Posted Event Details <!-- Draggable Portlet--></a></li>
+							<li><a href="index.jsp"><i
+									class="fa fa-circle-o"></i> Book an Event<!-- Draggable Portlet--></a></li>
 						</ul></li>
-					<li class="treeview"><a onclick=""> <i class="fa fa-users"></i>
+					<li class="treeview"><a onclick="hideReport()"> <i class="fa fa-users"></i>
 							<span>List of Event Attenders <!--Charts--></span> <i
 							class="fa fa-angle-left pull-right"></i>
 					</a>
@@ -98,14 +107,13 @@
 									class="fa fa-circle-o"></i>View According to posted Events<!--Todo List--></a></li>
 
 						</ul> </a></li>
-					<li class="treeview"><a href="#"> <i
+					<li class="treeview"><a onclick ="hideAttenders()"> <i
 							class="fa fa-credit-card "></i> <span>Payments</span> <i
 							class="fa fa-angle-left pull-right"></i>
 					</a>
 						<ul class="treeview-menu">
 							<li><a onclick="App.Cmp.viewPaymentProgress()"><i
-									class="fa fa-circle-o"></i> General</a></li>
-
+									class="fa fa-circle-o"></i> Graphical Representation </a></li>
 						</ul></li>
 
 				</ul>
@@ -127,6 +135,7 @@
 
 					<!-- start:AJAX Content to change depending on the item clicked -->
 					<div class="col-lg-12 flot-index" id="ajax-content"></div>
+					 <div id="showAttenders"></div>
 				<div class="row" style="display:none;" id="report" >
 				
 					<div class="col-md-6">
@@ -149,6 +158,7 @@
 							<h4>Ticket Sales per day</h4>
 							<hr>
 							<div id="paymentsperday" class="graph"></div>
+							<div id="totalPayments" class="graph"></div>
 						</div>
 					</div> 
 				</div>
